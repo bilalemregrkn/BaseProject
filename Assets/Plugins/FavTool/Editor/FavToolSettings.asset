@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fddf5784c7f2420eae2f851379aae15, type: 3}
+  m_Name: FavToolSettings
+  m_EditorClassIdentifier: FavoriteAssetsAssembly::FavTool.FavoriteAssets.FavToolSettings
+  EvenRowColor: {r: 0.18970275, g: 0.49020374, b: 0.8207547, a: 1}
+  OddRowColor: {r: 0.6981132, g: 0.21404415, b: 0.39177373, a: 1}

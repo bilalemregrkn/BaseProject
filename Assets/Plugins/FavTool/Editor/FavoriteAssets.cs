@@ -47,6 +47,7 @@ namespace FavTool.FavoriteAssets
 
         private void OnEnable()
         {
+            titleContent = new GUIContent("My Favorite Assets");
             InitializeProfilesDirectory();
             LoadCurrentProfileName();
             LoadAvailableProfiles();
@@ -80,6 +81,7 @@ namespace FavTool.FavoriteAssets
         {
             EditorGUILayout.Space();
 
+            DrawToolbar();
             DrawProfilesGUI();
             DrawHelpBox();
             ProcessAssetDragAndDrop();
@@ -89,6 +91,20 @@ namespace FavTool.FavoriteAssets
             DrawDetailsPanel();
 
             HandleEvents();
+        }
+
+        private void DrawToolbar()
+        {
+            EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
+            GUILayout.FlexibleSpace();
+
+            if (GUILayout.Button(new GUIContent(EditorGUIUtility.IconContent("SceneLoadIn").image, "Open a new Favorite Assets panel"),
+                EditorStyles.toolbarButton, GUILayout.Width(28)))
+            {
+                CreateInstance<FavoriteAssets>().Show();
+            }
+
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DrawHelpBox()
@@ -102,16 +118,13 @@ namespace FavTool.FavoriteAssets
         {
             EditorGUILayout.LabelField("My Favorite Assets", EditorStyles.boldLabel);
 
-            // Add padding to prevent overlap with resize handle
             float scrollPadding = 6f;
 
-            // Begin scroll view with dynamic height
             Rect scrollViewRect = EditorGUILayout.GetControlRect(false, _assetsScrollHeight - scrollPadding,
                 GUILayout.ExpandWidth(true));
-                
+
             _assetsScrollPosition = GUI.BeginScrollView(scrollViewRect, _assetsScrollPosition,
                 new Rect(0, 0, scrollViewRect.width - 16,
-                    // Calculate the content height
                     Mathf.Max(_containerItemHeight * _favoriteAssets.Count + 10f,
                         _assetsScrollHeight - scrollPadding)));
 
@@ -129,7 +142,6 @@ namespace FavTool.FavoriteAssets
 
             GUI.EndScrollView();
 
-            // Add spacing between scroll view and resize handle
             EditorGUILayout.Space(scrollPadding);
         }
 
@@ -138,19 +150,13 @@ namespace FavTool.FavoriteAssets
             Rect scrollViewRect = GUILayoutUtility.GetLastRect();
             float scrollPadding = 6f;
 
-            // Draw the resize handle
             _resizeHandleRect = new Rect(scrollViewRect.x, scrollViewRect.y + scrollViewRect.height + scrollPadding,
                 scrollViewRect.width, RESIZE_HANDLE_HEIGHT);
 
-            // Get appropriate colors based on theme
             Color handleColor = GetResizeHandleColor();
-            
             EditorGUI.DrawRect(_resizeHandleRect, handleColor);
-
-            // Draw grip lines for visual feedback
             DrawResizeHandleGripLines();
 
-            // Change cursor when hovering over the resize handle
             if (_resizeHandleRect.Contains(Event.current.mousePosition) || _isResizingScroll)
             {
                 EditorGUIUtility.AddCursorRect(_resizeHandleRect, MouseCursor.ResizeVertical);
@@ -159,10 +165,7 @@ namespace FavTool.FavoriteAssets
 
         private void DrawResizeHandleGripLines()
         {
-            Color gripColor = EditorGUIUtility.isProSkin
-                ? new Color(0.6f, 0.6f, 0.6f, 1.0f)
-                : new Color(0.3f, 0.3f, 0.3f, 1.0f);
-
+            Color gripColor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
             float centerY = _resizeHandleRect.y + _resizeHandleRect.height / 2;
 
             for (int i = 0; i < 5; i++)
@@ -174,17 +177,10 @@ namespace FavTool.FavoriteAssets
 
         private Color GetResizeHandleColor()
         {
-            Color baseColor = EditorGUIUtility.isProSkin
-                ? new Color(0.35f, 0.35f, 0.35f, 1.0f)
-                : new Color(0.7f, 0.7f, 0.7f, 1.0f);
+            Color baseColor = new Color(0.35f, 0.35f, 0.35f, 1.0f);
 
             if (_isResizingScroll || _resizeHandleRect.Contains(Event.current.mousePosition))
-            {
-                // Highlight on hover or during resize
-                return EditorGUIUtility.isProSkin
-                    ? new Color(0.4f, 0.7f, 1.0f, 1.0f)
-                    : new Color(0.2f, 0.5f, 0.9f, 1.0f);
-            }
+                return new Color(0.4f, 0.7f, 1.0f, 1.0f);
 
             return baseColor;
         }
@@ -193,20 +189,17 @@ namespace FavTool.FavoriteAssets
         {
             EditorGUILayout.Space(RESIZE_HANDLE_HEIGHT + 2);
             Rect dividerRect = EditorGUILayout.GetControlRect(false, 1);
-            EditorGUI.DrawRect(dividerRect,
-                EditorGUIUtility.isProSkin ? new Color(0.1f, 0.1f, 0.1f) : new Color(0.5f, 0.5f, 0.5f, 0.5f));
+            EditorGUI.DrawRect(dividerRect, new Color(0.1f, 0.1f, 0.1f));
             EditorGUILayout.Space(2);
         }
 
         private void DrawDetailsPanel()
         {
-            // Only show title if any asset editor is active
             bool hasAnyExpandedEditor = _assetEditorStates.Any(pair => pair.Value.IsExpanded);
             if (hasAnyExpandedEditor)
             {
                 EditorGUILayout.LabelField("Asset Details", EditorStyles.boldLabel);
-                
-                // Second panel: ScrollView for AssetEditors
+
                 _detailsScrollPosition = EditorGUILayout.BeginScrollView(_detailsScrollPosition, GUILayout.ExpandHeight(true));
 
                 DrawExpandedAssetDetails();
@@ -220,19 +213,14 @@ namespace FavTool.FavoriteAssets
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             SaveLayoutSettings();
 
-            // Draw AssetEditors
             foreach (var pair in _assetEditorStates.Where(p => p.Value.IsExpanded))
             {
                 EditorGUILayout.Space(5);
 
-                // Get the asset from the editor state's target
                 UnityEngine.Object targetAsset = pair.Value.Target;
                 if (targetAsset != null)
-                {
                     DrawAssetDetailsFoldout(pair.Key, pair.Value, targetAsset);
-                }
 
-                // Draw the inline editor
                 DrawInlineEditor(pair.Value);
                 EditorGUILayout.Space(5);
             }
@@ -243,39 +231,25 @@ namespace FavTool.FavoriteAssets
 
         private void DrawAssetDetailsFoldout(int assetId, AssetEditorState editorState, UnityEngine.Object asset)
         {
-            // Create foldout style
             GUIStyle foldoutStyle = new GUIStyle(EditorStyles.foldout);
             foldoutStyle.fontStyle = FontStyle.Bold;
             foldoutStyle.fontSize = 12;
 
-            // Foldout header
             EditorGUILayout.BeginHorizontal();
 
-            // Foldout control
-            bool newFoldedOut = EditorGUILayout.Foldout(
-                editorState.IsFoldedOut,
-                asset.name,
-                true,
-                foldoutStyle
-            );
+            bool newFoldedOut = EditorGUILayout.Foldout(editorState.IsFoldedOut, asset.name, true, foldoutStyle);
 
-            // Update if foldout state changed
             if (newFoldedOut != editorState.IsFoldedOut)
             {
                 editorState.IsFoldedOut = newFoldedOut;
-                // Immediately save state when folding/unfolding
                 SaveAssets();
                 Repaint();
             }
 
             EditorGUILayout.EndHorizontal();
 
-            // Divider line
             Rect headerDivider = EditorGUILayout.GetControlRect(false, 1);
-            EditorGUI.DrawRect(headerDivider,
-                EditorGUIUtility.isProSkin
-                    ? new Color(0.3f, 0.3f, 0.3f)
-                    : new Color(0.5f, 0.5f, 0.5f, 0.5f));
+            EditorGUI.DrawRect(headerDivider, new Color(0.3f, 0.3f, 0.3f));
         }
 
         private void DrawInlineEditor(AssetEditorState state)
@@ -284,14 +258,11 @@ namespace FavTool.FavoriteAssets
 
             try
             {
-                // Only show content if foldout is open
                 if (state.IsFoldedOut)
                 {
-                    // Show editor content in a box and slightly indent
                     EditorGUI.indentLevel++;
                     EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
-                    // Draw header
                     if (state.ShouldDrawHeader)
                     {
                         EditorGUILayout.BeginFadeGroup(0.9999f);
@@ -301,22 +272,17 @@ namespace FavTool.FavoriteAssets
                         EditorGUILayout.EndFadeGroup();
                     }
 
-                    // Draw the actual inspector GUI
                     if (state.ShouldDrawGUI)
                     {
                         EditorGUILayout.BeginVertical();
                         bool inspectorExpanded = InternalEditorUtility.GetIsInspectorExpanded(state.EditorInstance.target);
                         if (!state.ShouldDrawHeader)
-                        {
                             InternalEditorUtility.SetIsInspectorExpanded(state.EditorInstance.target, true);
-                        }
 
                         state.EditorInstance.OnInspectorGUI();
 
                         if (!state.ShouldDrawHeader)
-                        {
                             InternalEditorUtility.SetIsInspectorExpanded(state.EditorInstance.target, inspectorExpanded);
-                        }
 
                         EditorGUILayout.EndVertical();
                     }
@@ -327,10 +293,7 @@ namespace FavTool.FavoriteAssets
             }
             catch (Exception ex)
             {
-                // Handle exceptions safely to avoid breaking the editor
-                if (ex is ExitGUIException)
-                    throw;
-
+                if (ex is ExitGUIException) throw;
                 Debug.LogException(ex);
             }
         }
@@ -405,19 +368,16 @@ namespace FavTool.FavoriteAssets
         private void HandleEvents()
         {
             Event currentEvent = Event.current;
-            
-            // Handle resizing
+
             HandleResizing(currentEvent);
-            
-            // Handle drag and drop events
-            if (currentEvent.type == EventType.MouseDrag || 
+
+            if (currentEvent.type == EventType.MouseDrag ||
                 currentEvent.type == EventType.DragUpdated ||
                 currentEvent.type == EventType.DragPerform)
             {
                 Repaint();
             }
 
-            // Save on mouse up
             if (currentEvent.type == EventType.MouseUp)
             {
                 SaveAssets();
@@ -426,7 +386,7 @@ namespace FavTool.FavoriteAssets
 
         private void HandleResizing(Event e)
         {
-            float scrollPadding = 6f; // Must match the padding in OnGUI
+            float scrollPadding = 6f;
 
             switch (e.type)
             {
@@ -441,16 +401,11 @@ namespace FavTool.FavoriteAssets
                 case EventType.MouseDrag:
                     if (_isResizingScroll)
                     {
-                        // Calculate new height based on mouse position
-                        float minHeight = 100f; // Minimum height
-                        float maxHeight = position.height - 200f; // Maximum height
-
-                        // Adjust calculation to account for the padding
-                        _assetsScrollHeight =
-                            Mathf.Clamp(
-                                e.mousePosition.y - _resizeHandleRect.y + RESIZE_HANDLE_HEIGHT + scrollPadding +
-                                _assetsScrollHeight, minHeight, maxHeight);
-
+                        float minHeight = 100f;
+                        float maxHeight = position.height - 200f;
+                        _assetsScrollHeight = Mathf.Clamp(
+                            e.mousePosition.y - _resizeHandleRect.y + RESIZE_HANDLE_HEIGHT + scrollPadding + _assetsScrollHeight,
+                            minHeight, maxHeight);
                         Repaint();
                         e.Use();
                     }
@@ -460,7 +415,7 @@ namespace FavTool.FavoriteAssets
                     if (_isResizingScroll)
                     {
                         _isResizingScroll = false;
-                        SaveAssets(); // Save the new height
+                        SaveAssets();
                         e.Use();
                     }
                     break;
@@ -475,9 +430,7 @@ namespace FavTool.FavoriteAssets
             switch (evt.type)
             {
                 case EventType.DragUpdated:
-                    if (!dropArea.Contains(evt.mousePosition))
-                        return;
-
+                    if (!dropArea.Contains(evt.mousePosition)) return;
                     if (DragAndDrop.objectReferences.Length > 0)
                     {
                         DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
@@ -486,9 +439,7 @@ namespace FavTool.FavoriteAssets
                     break;
 
                 case EventType.DragPerform:
-                    if (!dropArea.Contains(evt.mousePosition))
-                        return;
-
+                    if (!dropArea.Contains(evt.mousePosition)) return;
                     DragAndDrop.AcceptDrag();
                     HandleAssetDrop();
                     evt.Use();
@@ -506,18 +457,14 @@ namespace FavTool.FavoriteAssets
                 {
                     string draggedAssetPath = AssetDatabase.GetAssetPath(draggedObject);
 
-                    bool alreadyExists = _favoriteAssets.Any(existingAsset => 
-                        existingAsset != null && 
+                    bool alreadyExists = _favoriteAssets.Any(existingAsset =>
+                        existingAsset != null &&
                         AssetDatabase.GetAssetPath(existingAsset) == draggedAssetPath);
 
                     if (alreadyExists)
-                    {
                         duplicateCount++;
-                    }
                     else
-                    {
                         _favoriteAssets.Add(draggedObject);
-                    }
                 }
             }
 
@@ -526,7 +473,6 @@ namespace FavTool.FavoriteAssets
                 string message = duplicateCount == 1
                     ? "One asset was not added because it already exists in the profile."
                     : $"{duplicateCount} assets were not added because they already exist in the profile.";
-
                 EditorUtility.DisplayDialog("Duplicate Asset", message, "OK");
             }
 
@@ -541,13 +487,10 @@ namespace FavTool.FavoriteAssets
         private void InitializeReorderableList()
         {
             _reorderableAssetsList = new ReorderableList(_favoriteAssets, typeof(UnityEngine.Object), true, false, false, false);
-
             _reorderableAssetsList.drawElementCallback = DrawAssetListItem;
             _reorderableAssetsList.elementHeightCallback = (int index) => _containerItemHeight;
             _reorderableAssetsList.headerHeight = 0;
-            _reorderableAssetsList.drawElementBackgroundCallback = (Rect rect, int index, bool isActive, bool isFocused) => {
-                // Background handled in drawElementCallback for better control
-            };
+            _reorderableAssetsList.drawElementBackgroundCallback = (Rect rect, int index, bool isActive, bool isFocused) => { };
         }
 
         private void DrawAssetListItem(Rect rect, int index, bool isActive, bool isFocused)
@@ -556,11 +499,8 @@ namespace FavTool.FavoriteAssets
                 return;
 
             Rect adjustedRect = new Rect(rect.x, rect.y + 1f, rect.width, rect.height - 2f);
+            DrawAssetItemBackground(adjustedRect, index, isActive, isFocused);
 
-            // Draw background
-            DrawAssetItemBackground(adjustedRect, isActive, isFocused);
-
-            // Draw asset field
             Rect fieldRect = new Rect(
                 adjustedRect.x + 8,
                 adjustedRect.y + (adjustedRect.height - EditorGUIUtility.singleLineHeight) / 2,
@@ -570,48 +510,30 @@ namespace FavTool.FavoriteAssets
 
             EditorGUI.BeginChangeCheck();
             UnityEngine.Object newObject = EditorGUI.ObjectField(
-                fieldRect,
-                GUIContent.none,
-                _favoriteAssets[index],
-                typeof(UnityEngine.Object),
-                false
-            );
-            
-            if (EditorGUI.EndChangeCheck())
-            {
-                HandleAssetReplacement(index, newObject);
-            }
+                fieldRect, GUIContent.none, _favoriteAssets[index], typeof(UnityEngine.Object), false);
 
-            // Draw buttons
+            if (EditorGUI.EndChangeCheck())
+                HandleAssetReplacement(index, newObject);
+
             DrawAssetItemButtons(adjustedRect, index);
         }
 
-        private void DrawAssetItemBackground(Rect rect, bool isActive, bool isFocused)
+        private void DrawAssetItemBackground(Rect rect, int index, bool isActive, bool isFocused)
         {
-            // Use theme-appropriate background color
-            Color bgColor = EditorGUIUtility.isProSkin
-                ? new Color(0.22f, 0.22f, 0.22f, 1.0f)
-                : new Color(0.76f, 0.76f, 0.76f, 1.0f);
-
+            FavToolSettings settings = FavToolSettings.Instance;
+            Color bgColor = index % 2 == 0 ? settings.EvenRowColor : settings.OddRowColor;
             EditorGUI.DrawRect(rect, bgColor);
 
-            // Create a subtle border effect
             if (isActive || isFocused)
             {
-                // Active/focused border color
-                Color borderColor = EditorGUIUtility.isProSkin
-                    ? new Color(0.32f, 0.62f, 0.95f, 1.0f)
-                    : new Color(0.22f, 0.52f, 0.85f, 1.0f);
+                Color borderColor = new Color(0.32f, 0.62f, 0.95f, 1.0f);
 
                 Rect borderRect = new Rect(rect.x, rect.y, rect.width, 1);
                 EditorGUI.DrawRect(borderRect, borderColor);
-
                 borderRect.y = rect.y + rect.height - 1;
                 EditorGUI.DrawRect(borderRect, borderColor);
-
                 borderRect = new Rect(rect.x, rect.y, 1, rect.height);
                 EditorGUI.DrawRect(borderRect, borderColor);
-
                 borderRect.x = rect.x + rect.width - 1;
                 EditorGUI.DrawRect(borderRect, borderColor);
             }
@@ -622,49 +544,30 @@ namespace FavTool.FavoriteAssets
             UnityEngine.Object asset = _favoriteAssets[index];
             if (asset == null) return;
 
-            // Button layout
             float buttonSize = EditorGUIUtility.singleLineHeight * 1.2f;
             float startX = adjustedRect.x + adjustedRect.width / 3 + 20;
             float buttonY = adjustedRect.y + (adjustedRect.height - buttonSize) / 2;
 
-            // Calculate button rectangles
             Rect openButtonRect = new Rect(startX, buttonY, 64, buttonSize);
             Rect inspectButtonRect = new Rect(startX + 70, buttonY, 64, buttonSize);
             Rect deleteButtonRect = new Rect(startX + 140, buttonY, 24, buttonSize);
             Rect moreInfoButtonRect = new Rect(startX + 170, buttonY, 24, buttonSize);
 
-            // Open button
-            GUIContent openButtonContent = new GUIContent(" Open");
-            openButtonContent.tooltip = "Click to open the asset";
-
-            if (GUI.Button(openButtonRect, openButtonContent))
+            if (GUI.Button(openButtonRect, new GUIContent(" Open", "Click to open the asset")))
             {
                 Event e = Event.current;
                 if (e.type == EventType.Used && openButtonRect.Contains(e.mousePosition))
-                {
                     OpenAsset(asset);
-                }
             }
 
-            // Inspect button
-            GUIContent inspectButtonContent = new GUIContent("Inspect");
-            inspectButtonContent.tooltip = "Click to inspect the asset in Inspector";
-
-            if (GUI.Button(inspectButtonRect, inspectButtonContent))
+            if (GUI.Button(inspectButtonRect, new GUIContent("Inspect", "Click to inspect the asset in Inspector")))
             {
                 Event e = Event.current;
                 if (e.type == EventType.Used && inspectButtonRect.Contains(e.mousePosition))
-                {
                     Selection.activeObject = asset;
-                }
             }
 
-            // Delete button
-            GUIContent deleteButtonContent = new GUIContent();
-            deleteButtonContent.image = EditorGUIUtility.IconContent("Toolbar Minus").image;
-            deleteButtonContent.tooltip = "Click to remove this asset";
-
-            if (GUI.Button(deleteButtonRect, deleteButtonContent))
+            if (GUI.Button(deleteButtonRect, new GUIContent(EditorGUIUtility.IconContent("Toolbar Minus").image, "Click to remove this asset")))
             {
                 Event e = Event.current;
                 if (e.type == EventType.Used && deleteButtonRect.Contains(e.mousePosition))
@@ -674,7 +577,6 @@ namespace FavTool.FavoriteAssets
                 }
             }
 
-            // More info button
             DrawMoreInfoButton(moreInfoButtonRect, asset);
         }
 
@@ -686,25 +588,18 @@ namespace FavTool.FavoriteAssets
             int instanceID = asset.GetInstanceID();
             bool hasInlineEditor = _assetEditorStates.ContainsKey(instanceID);
 
-            // Use different icon when expanded
-            if (hasInlineEditor && _assetEditorStates[instanceID].IsExpanded)
-            {
-                buttonContent.image = EditorGUIUtility.IconContent("d_animationvisibilitytoggleoff@2x").image;
-            }
-            else
-            {
-                buttonContent.image = EditorGUIUtility.IconContent("d_animationvisibilitytoggleon@2x").image;
-            }
+            string iconName = hasInlineEditor && _assetEditorStates[instanceID].IsExpanded
+                ? "d_animationvisibilitytoggleoff@2x"
+                : "d_animationvisibilitytoggleon@2x";
 
+            buttonContent.image = EditorGUIUtility.IconContent(iconName).image;
             buttonContent.tooltip = "Click for more info";
 
             if (GUI.Button(buttonRect, buttonContent))
             {
                 Event e = Event.current;
                 if (e.type == EventType.Used && buttonRect.Contains(e.mousePosition))
-                {
                     ToggleAssetDetails(asset, instanceID, hasInlineEditor);
-                }
             }
         }
 
@@ -712,41 +607,30 @@ namespace FavTool.FavoriteAssets
         {
             if (!hasInlineEditor)
             {
-                // Create inline editor state
                 AssetEditorState state = new AssetEditorState
                 {
                     IsExpanded = true,
                     Target = asset,
-                    IsFoldedOut = true // Default is expanded
+                    IsFoldedOut = true
                 };
-                
                 _assetEditorStates[instanceID] = state;
                 UpdateEditors(state);
             }
             else
             {
-                // Toggle expanded state
                 _assetEditorStates[instanceID].IsExpanded = !_assetEditorStates[instanceID].IsExpanded;
                 if (!_assetEditorStates[instanceID].IsExpanded)
-                {
                     DestroyEditor(_assetEditorStates[instanceID]);
-                }
                 else if (_assetEditorStates[instanceID].EditorInstance == null)
-                {
                     UpdateEditors(_assetEditorStates[instanceID]);
-                }
             }
 
-            // Force repaint to update UI
             Repaint();
-
-            // Save state immediately when toggling
             SaveAssets();
         }
 
         private void HandleAssetReplacement(int index, UnityEngine.Object newObject)
         {
-            // If changed, remove old asset's editor state if it exists
             if (_favoriteAssets[index] != null)
             {
                 int oldInstanceID = _favoriteAssets[index].GetInstanceID();
@@ -764,8 +648,7 @@ namespace FavTool.FavoriteAssets
         private void RemoveAsset(int index)
         {
             UnityEngine.Object asset = _favoriteAssets[index];
-            
-            // Remove associated editor state
+
             if (asset != null)
             {
                 int instanceID = asset.GetInstanceID();
@@ -782,25 +665,13 @@ namespace FavTool.FavoriteAssets
 
         private void OpenAsset(UnityEngine.Object asset)
         {
-            if (asset == null)
-                return;
+            if (asset == null) return;
 
-            if (asset is GameObject prefab)
-            {
-                AssetDatabase.OpenAsset(prefab);
-            }
-            else if (asset is ScriptableObject || 
-                     asset is Texture || 
-                     asset is Texture2D || 
-                     asset is Sprite ||
-                     asset is Material)
-            {
+            if (asset is ScriptableObject || asset is Texture || asset is Texture2D ||
+                asset is Sprite || asset is Material)
                 Selection.activeObject = asset;
-            }
             else
-            {
                 AssetDatabase.OpenAsset(asset);
-            }
         }
 
         #endregion
@@ -812,34 +683,21 @@ namespace FavTool.FavoriteAssets
             if (state == null || state.Target == null) return;
 
             bool isGameObject = state.Target is GameObject;
-
-            // Setup editor properties based on asset type
             state.ShouldDrawHeader = true;
             state.ShouldDrawGUI = !isGameObject;
-            state.ShouldDrawPreview = true; // Always allow preview
-
-            // Create the main editor
+            state.ShouldDrawPreview = true;
             state.EditorInstance = Editor.CreateEditor(state.Target);
 
-            // Create preview editor if needed
             Component targetAsComponent = state.Target as Component;
-            if (targetAsComponent != null)
-            {
-                state.PreviewEditorInstance = Editor.CreateEditor(targetAsComponent.gameObject);
-            }
-            else
-            {
-                state.PreviewEditorInstance = state.EditorInstance;
-            }
+            state.PreviewEditorInstance = targetAsComponent != null
+                ? Editor.CreateEditor(targetAsComponent.gameObject)
+                : state.EditorInstance;
         }
 
         private void DestroyAllEditors()
         {
             foreach (var state in _assetEditorStates.Values)
-            {
                 DestroyEditor(state);
-            }
-
             _assetEditorStates.Clear();
         }
 
@@ -867,14 +725,8 @@ namespace FavTool.FavoriteAssets
             SaveAssets();
             _currentProfileName = _availableProfiles[_selectedProfileIndex];
             SaveCurrentProfileName();
-
-            // Clear existing editor states before loading the new profile
             DestroyAllEditors();
-
-            // Load the assets and their states from the new profile
             LoadAssets();
-
-            // Recreate the list and update the UI
             InitializeReorderableList();
         }
 
@@ -889,16 +741,12 @@ namespace FavTool.FavoriteAssets
                 {
                     string fileName = Path.GetFileNameWithoutExtension(profilePath);
                     if (fileName != "CurrentProfile")
-                    {
                         _availableProfiles.Add(fileName);
-                    }
                 }
             }
 
             if (_availableProfiles.Count == 0)
-            {
                 _availableProfiles.Add("Default");
-            }
         }
 
         private void UpdateSelectedProfileIndex()
@@ -921,9 +769,7 @@ namespace FavTool.FavoriteAssets
                 ProfileNameData profileNameData = JsonUtility.FromJson<ProfileNameData>(jsonData);
 
                 if (profileNameData != null && !string.IsNullOrEmpty(profileNameData.CurrentProfileName))
-                {
                     _currentProfileName = profileNameData.CurrentProfileName;
-                }
             }
             else
             {
@@ -934,12 +780,8 @@ namespace FavTool.FavoriteAssets
         private void SaveCurrentProfileName()
         {
             string currentProfilePath = Path.Combine(_profilesDirectory, "CurrentProfile.json");
-
-            ProfileNameData profileNameData = new ProfileNameData();
-            profileNameData.CurrentProfileName = _currentProfileName;
-
-            string jsonData = JsonUtility.ToJson(profileNameData, true);
-            File.WriteAllText(currentProfilePath, jsonData);
+            ProfileNameData profileNameData = new ProfileNameData { CurrentProfileName = _currentProfileName };
+            File.WriteAllText(currentProfilePath, JsonUtility.ToJson(profileNameData, true));
         }
 
         private void CreateNewProfile(string profileName)
@@ -948,32 +790,25 @@ namespace FavTool.FavoriteAssets
                 return;
 
             SaveAssets();
-
             _currentProfileName = profileName;
             _favoriteAssets.Clear();
-            _assetEditorStates.Clear(); // Clear editor states for the new profile
+            _assetEditorStates.Clear();
             SaveAssets();
 
             _availableProfiles.Add(profileName);
             UpdateSelectedProfileIndex();
-
             SaveCurrentProfileName();
         }
 
         private void DeleteCurrentProfile()
         {
-            if (_availableProfiles.Count <= 1)
-                return;
+            if (_availableProfiles.Count <= 1) return;
 
             string profilePath = Path.Combine(_profilesDirectory, _currentProfileName + ".json");
-
             if (File.Exists(profilePath))
-            {
                 File.Delete(profilePath);
-            }
 
             _availableProfiles.Remove(_currentProfileName);
-
             _currentProfileName = _availableProfiles[0];
             UpdateSelectedProfileIndex();
 
@@ -988,40 +823,34 @@ namespace FavTool.FavoriteAssets
 
         private void SaveAssets()
         {
-            AssetProfileData saveData = new AssetProfileData();
-            saveData.AssetPaths = new List<string>();
-            saveData.ExpandedAssetPaths = new List<string>();
-            saveData.FoldedOutStates = new List<bool>();
-            // Add the scroll view height to the save data
-            saveData.AssetsScrollHeight = _assetsScrollHeight;
+            AssetProfileData saveData = new AssetProfileData
+            {
+                AssetPaths = new List<string>(),
+                ExpandedAssetPaths = new List<string>(),
+                FoldedOutStates = new List<bool>(),
+                AssetsScrollHeight = _assetsScrollHeight
+            };
 
             foreach (UnityEngine.Object asset in _favoriteAssets)
             {
-                if (asset != null)
+                if (asset == null) continue;
+                string assetPath = AssetDatabase.GetAssetPath(asset);
+                if (string.IsNullOrEmpty(assetPath)) continue;
+
+                saveData.AssetPaths.Add(assetPath);
+
+                int instanceID = asset.GetInstanceID();
+                bool isExpanded = _assetEditorStates.ContainsKey(instanceID) &&
+                                  _assetEditorStates[instanceID].IsExpanded;
+                if (isExpanded)
                 {
-                    string assetPath = AssetDatabase.GetAssetPath(asset);
-                    if (!string.IsNullOrEmpty(assetPath))
-                    {
-                        saveData.AssetPaths.Add(assetPath);
-
-                        // Check if this asset has expanded editor state and save it
-                        int instanceID = asset.GetInstanceID();
-                        bool isExpanded = _assetEditorStates.ContainsKey(instanceID) &&
-                                          _assetEditorStates[instanceID].IsExpanded;
-                        bool isFoldedOut = isExpanded && _assetEditorStates[instanceID].IsFoldedOut;
-
-                        if (isExpanded)
-                        {
-                            saveData.ExpandedAssetPaths.Add(assetPath);
-                            saveData.FoldedOutStates.Add(isFoldedOut);
-                        }
-                    }
+                    saveData.ExpandedAssetPaths.Add(assetPath);
+                    saveData.FoldedOutStates.Add(_assetEditorStates[instanceID].IsFoldedOut);
                 }
             }
 
             string profilePath = Path.Combine(_profilesDirectory, _currentProfileName + ".json");
-            string jsonData = JsonUtility.ToJson(saveData, true);
-            File.WriteAllText(profilePath, jsonData);
+            File.WriteAllText(profilePath, JsonUtility.ToJson(saveData, true));
         }
 
         private void LoadAssets()
@@ -1030,40 +859,25 @@ namespace FavTool.FavoriteAssets
             _assetEditorStates.Clear();
 
             string profilePath = Path.Combine(_profilesDirectory, _currentProfileName + ".json");
+            if (!File.Exists(profilePath)) return;
 
-            if (File.Exists(profilePath))
+            AssetProfileData loadedData = JsonUtility.FromJson<AssetProfileData>(File.ReadAllText(profilePath));
+            if (loadedData == null) return;
+
+            if (loadedData.AssetsScrollHeight > 0)
+                _assetsScrollHeight = loadedData.AssetsScrollHeight;
+
+            if (loadedData.AssetPaths != null)
             {
-                string jsonData = File.ReadAllText(profilePath);
-                AssetProfileData loadedData = JsonUtility.FromJson<AssetProfileData>(jsonData);
-
-                if (loadedData != null)
+                foreach (string assetPath in loadedData.AssetPaths)
                 {
-                    // Load the scroll view height if available
-                    if (loadedData.AssetsScrollHeight > 0)
-                    {
-                        _assetsScrollHeight = loadedData.AssetsScrollHeight;
-                    }
-
-                    if (loadedData.AssetPaths != null)
-                    {
-                        // First load all assets
-                        foreach (string assetPath in loadedData.AssetPaths)
-                        {
-                            UnityEngine.Object loadedAsset =
-                                AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-                            if (loadedAsset != null)
-                            {
-                                _favoriteAssets.Add(loadedAsset);
-                            }
-                        }
-
-                        // Then restore expanded states for those that need it
-                        if (loadedData.ExpandedAssetPaths != null)
-                        {
-                            RestoreAssetEditorStates(loadedData);
-                        }
-                    }
+                    UnityEngine.Object loadedAsset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
+                    if (loadedAsset != null)
+                        _favoriteAssets.Add(loadedAsset);
                 }
+
+                if (loadedData.ExpandedAssetPaths != null)
+                    RestoreAssetEditorStates(loadedData);
             }
         }
 
@@ -1071,34 +885,21 @@ namespace FavTool.FavoriteAssets
         {
             for (int i = 0; i < loadedData.ExpandedAssetPaths.Count; i++)
             {
-                string expandedAssetPath = loadedData.ExpandedAssetPaths[i];
                 UnityEngine.Object expandedAsset =
-                    AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(expandedAssetPath);
+                    AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(loadedData.ExpandedAssetPaths[i]);
+                if (expandedAsset == null) continue;
 
-                if (expandedAsset != null)
+                AssetEditorState state = new AssetEditorState
                 {
-                    int instanceID = expandedAsset.GetInstanceID();
+                    IsExpanded = true,
+                    Target = expandedAsset,
+                    IsFoldedOut = (loadedData.FoldedOutStates != null && i < loadedData.FoldedOutStates.Count)
+                        ? loadedData.FoldedOutStates[i]
+                        : true
+                };
 
-                    // Create and setup the inline editor state
-                    AssetEditorState state = new AssetEditorState
-                    {
-                        IsExpanded = true,
-                        Target = expandedAsset
-                    };
-
-                    // Set folded out state if we have that information
-                    if (loadedData.FoldedOutStates != null && i < loadedData.FoldedOutStates.Count)
-                    {
-                        state.IsFoldedOut = loadedData.FoldedOutStates[i];
-                    }
-                    else
-                    {
-                        state.IsFoldedOut = true; // Default to expanded
-                    }
-
-                    _assetEditorStates[instanceID] = state;
-                    UpdateEditors(state);
-                }
+                _assetEditorStates[expandedAsset.GetInstanceID()] = state;
+                UpdateEditors(state);
             }
         }
 
@@ -1140,5 +941,4 @@ namespace FavTool.FavoriteAssets
 
         #endregion
     }
-    
 }
