@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Plugins.UpdateManager
+
+namespace Plugins.UpdateService
 {
-    public sealed class UpdateManager : MonoBehaviour, IUpdateManager
+    public sealed class UpdateService : MonoBehaviour, IUpdateService
     {
         private readonly List<IUpdatable> _update = new(256);
         private readonly List<ILateUpdatable> _lateUpdate = new(128);

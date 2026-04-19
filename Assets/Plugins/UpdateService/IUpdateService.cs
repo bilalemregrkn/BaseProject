@@ -1,6 +1,6 @@
-namespace Plugins.UpdateManager
+namespace Plugins.UpdateService
 {
-    public interface IUpdateManager
+    public interface IUpdateService
     {
         void Add(IUpdatable updatable);
         void Remove(IUpdatable updatable);

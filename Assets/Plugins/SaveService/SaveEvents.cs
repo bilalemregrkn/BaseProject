@@ -1,4 +1,4 @@
-namespace Plugins.SaveManagement
+namespace Plugins.SaveService
 {
     public readonly struct DataSaved
     {

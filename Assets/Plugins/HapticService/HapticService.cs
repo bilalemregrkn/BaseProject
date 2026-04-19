@@ -1,4 +1,4 @@
-using Plugins.SaveManagement;
+using Plugins.SaveService;
 using UnityEngine;
 
 namespace Plugins.HapticService
@@ -7,7 +7,7 @@ namespace Plugins.HapticService
     {
         private const string EnabledKey = "haptic_enabled";
 
-        private ISaveManager _saveManager;
+        private ISaveService _saveManager;
         private bool _enabled;
 
         public bool Enabled
@@ -20,7 +20,7 @@ namespace Plugins.HapticService
             }
         }
 
-        public HapticService(ISaveManager saveManager)
+        public HapticService(ISaveService saveManager)
         {
             _saveManager = saveManager;
             _enabled = _saveManager.Load(EnabledKey, true);

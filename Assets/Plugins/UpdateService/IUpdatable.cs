@@ -1,4 +1,4 @@
-namespace Plugins.UpdateManager
+namespace Plugins.UpdateService
 {
     public interface IUpdatable
     {

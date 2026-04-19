@@ -3,8 +3,8 @@ using Plugins.EventBus;
 using Plugins.HapticService;
 using Plugins.MusicService;
 using Plugins.PanelService;
-using Plugins.SaveManagement;
-using Plugins.UpdateManager;
+using Plugins.SaveService;
+using Plugins.UpdateService;
 using Reflex.Core;
 using UnityEngine;
 
@@ -14,18 +14,18 @@ public class RootInstaller : MonoBehaviour, IInstaller
     {
         builder.RegisterValue(new EventBus(), new[] { typeof(IEventBus) });
 
-        var updateManager = new GameObject().AddComponent<UpdateManager>();
-        DontDestroyOnLoad(updateManager);
-        builder.RegisterValue(updateManager, new[] { typeof(IUpdateManager) });
+        var updateService = new GameObject("UpdateService").AddComponent<UpdateService>();
+        DontDestroyOnLoad(updateService);
+        builder.RegisterValue(updateService, new[] { typeof(IUpdateService) });
 
-        builder.RegisterType(typeof(SaveManager), new[] { typeof(ISaveManager) }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+        builder.RegisterType(typeof(SaveService), new[] { typeof(ISaveService) }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
 
         builder.RegisterFactory<IAudioService>(container =>
         {
             var go = new GameObject("AudioService");
             DontDestroyOnLoad(go);
             var service = go.AddComponent<AudioService>();
-            service.Init(container.Single<ISaveManager>());
+            service.Init(container.Single<ISaveService>());
             return service;
         }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
 
@@ -34,7 +34,7 @@ public class RootInstaller : MonoBehaviour, IInstaller
             var go = new GameObject("MusicService");
             DontDestroyOnLoad(go);
             var service = go.AddComponent<MusicService>();
-            service.Init(container.Single<ISaveManager>());
+            service.Init(container.Single<ISaveService>());
             return service;
         }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
 

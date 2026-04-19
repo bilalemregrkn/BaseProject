@@ -1,13 +1,13 @@
 using Plugins.EventBus;
 using UnityEngine;
 
-namespace Plugins.SaveManagement
+namespace Plugins.SaveService
 {
-    public sealed class SaveManager : ISaveManager
+    public sealed class SaveService : ISaveService
     {
         private readonly IEventBus _eventBus;
 
-        public SaveManager(IEventBus eventBus)
+        public SaveService(IEventBus eventBus)
         {
             _eventBus = eventBus;
         }

@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Plugins.SaveManagement;
+using Plugins.SaveService;
 using PrimeTween;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Plugins.MusicService
         private const string VolumeKey = "music_volume";
         private const string MutedKey = "music_muted";
 
-        private ISaveManager _saveManager;
+        private ISaveService _saveManager;
         private AudioSource _sourceA;
         private AudioSource _sourceB;
         private bool _usingA = true;
@@ -44,7 +44,7 @@ namespace Plugins.MusicService
         private AudioSource ActiveSource => _usingA ? _sourceA : _sourceB;
         private AudioSource InactiveSource => _usingA ? _sourceB : _sourceA;
 
-        public void Init(ISaveManager saveManager)
+        public void Init(ISaveService saveManager)
         {
             _saveManager = saveManager;
             _volume = _saveManager.Load(VolumeKey, 1f);

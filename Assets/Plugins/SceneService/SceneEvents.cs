@@ -1,4 +1,4 @@
-namespace Plugins.SceneManagement
+namespace Plugins.SceneService
 {
     public readonly struct SceneLoadStarted
     {

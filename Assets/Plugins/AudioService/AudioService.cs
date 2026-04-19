@@ -1,4 +1,4 @@
-using Plugins.SaveManagement;
+using Plugins.SaveService;
 using UnityEngine;
 
 namespace Plugins.AudioService
@@ -8,7 +8,7 @@ namespace Plugins.AudioService
         private const string VolumeKey = "sfx_volume";
         private const string MutedKey = "sfx_muted";
 
-        private ISaveManager _saveManager;
+        private ISaveService _saveManager;
         private float _volume = 1f;
         private bool _muted;
 
@@ -32,7 +32,7 @@ namespace Plugins.AudioService
             }
         }
 
-        public void Init(ISaveManager saveManager)
+        public void Init(ISaveService saveManager)
         {
             _saveManager = saveManager;
             _volume = _saveManager.Load(VolumeKey, 1f);

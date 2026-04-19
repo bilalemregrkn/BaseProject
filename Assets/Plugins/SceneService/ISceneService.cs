@@ -1,8 +1,8 @@
 using Cysharp.Threading.Tasks;
 
-namespace Plugins.SceneManagement
+namespace Plugins.SceneService
 {
-    public interface ISceneManager
+    public interface ISceneService
     {
         bool IsLoading { get; }
         string ActiveScene { get; }

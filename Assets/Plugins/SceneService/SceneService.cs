@@ -4,9 +4,9 @@ using Plugins.EventBus;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Plugins.SceneManagement
+namespace Plugins.SceneService
 {
-    public sealed class SceneManager : MonoBehaviour, ISceneManager
+    public sealed class SceneService : MonoBehaviour, ISceneService
     {
         private IEventBus _eventBus;
         private readonly HashSet<string> _loadedScenes = new(8);
