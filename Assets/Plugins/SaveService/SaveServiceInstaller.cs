@@ -1,0 +1,13 @@
+using Reflex.Core;
+using UnityEngine;
+
+namespace Plugins.SaveService
+{
+    public class SaveServiceInstaller : MonoBehaviour, IInstaller
+    {
+        public void InstallBindings(ContainerBuilder builder)
+        {
+            builder.RegisterType(typeof(SaveService), new[] { typeof(ISaveService) }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+        }
+    }
+}
