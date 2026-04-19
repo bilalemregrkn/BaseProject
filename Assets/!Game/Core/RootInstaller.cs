@@ -2,6 +2,7 @@ using Plugins.AudioService;
 using Plugins.EventBus;
 using Plugins.HapticService;
 using Plugins.MusicService;
+using Plugins.PanelService;
 using Plugins.SaveManagement;
 using Plugins.UpdateManager;
 using Reflex.Core;
@@ -38,5 +39,7 @@ public class RootInstaller : MonoBehaviour, IInstaller
         }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
 
         builder.RegisterType(typeof(HapticService), new[] { typeof(IHapticService) }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+
+        builder.RegisterType(typeof(PanelService), new[] { typeof(IPanelService) }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
     }
 }
