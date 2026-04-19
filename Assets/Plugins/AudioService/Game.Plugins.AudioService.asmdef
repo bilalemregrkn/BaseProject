@@ -1,0 +1,16 @@
+{
+    "name": "Game.Plugins.AudioService",
+    "rootNamespace": "Plugins.AudioService",
+    "references": [
+        "GUID:5d728edac334745ec908e43f88fc8077"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

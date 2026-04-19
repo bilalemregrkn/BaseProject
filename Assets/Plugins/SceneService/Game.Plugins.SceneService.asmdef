@@ -1,0 +1,17 @@
+{
+    "name": "Game.Plugins.SceneService",
+    "rootNamespace": "Plugins.SceneService",
+    "references": [
+        "GUID:ad257b701659a484bac097439b941a7a",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

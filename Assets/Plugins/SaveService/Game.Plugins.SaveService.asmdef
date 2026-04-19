@@ -1,0 +1,16 @@
+{
+    "name": "Game.Plugins.SaveService",
+    "rootNamespace": "Plugins.SaveService",
+    "references": [
+        "GUID:ad257b701659a484bac097439b941a7a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
