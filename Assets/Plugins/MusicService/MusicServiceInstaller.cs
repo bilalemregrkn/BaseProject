@@ -1,21 +1,26 @@
 using Reflex.Core;
-using Plugins.SaveService;
+using Reflex.Enums;
 using UnityEngine;
 
 namespace Plugins.MusicService
 {
     public class MusicServiceInstaller : MonoBehaviour, IInstaller
     {
+        [SerializeField] private MusicSettings _settings;
+
         public void InstallBindings(ContainerBuilder builder)
         {
+            builder.RegisterInstance(_settings);
+            builder.RegisterType(typeof(MusicVault), new[] { typeof(MusicVault) }, Lifetime.Singleton, Resolution.Lazy);
+
             builder.RegisterFactory<IMusicService>(container =>
             {
                 var go = new GameObject("MusicService");
                 DontDestroyOnLoad(go);
                 var service = go.AddComponent<MusicService>();
-                service.Init(container.Single<ISaveService>());
+                service.Init(container.Single<MusicVault>(), container.Single<MusicSettings>());
                 return service;
-            }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+            }, Lifetime.Singleton, Resolution.Lazy);
         }
     }
 }

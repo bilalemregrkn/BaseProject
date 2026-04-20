@@ -1,33 +1,26 @@
-using System;
-using System.Collections.Generic;
 using Plugins.EventBus;
-using Plugins.SaveService;
 
 namespace Plugins.CurrencyService
 {
     public sealed class CurrencyService : ICurrencyService
     {
-        private const string SaveKeyPrefix = "currency_";
-
         private readonly IEventBus _eventBus;
-        private readonly ISaveService _saveService;
-        private readonly Dictionary<CurrencyType, int> _amounts = new();
+        private readonly CurrencyVault _vault;
+        private readonly CurrencySettings _settings;
 
-        public CurrencyService(IEventBus eventBus, ISaveService saveService)
+        public CurrencyService(IEventBus eventBus, CurrencyVault vault, CurrencySettings settings)
         {
             _eventBus = eventBus;
-            _saveService = saveService;
-
-            foreach (CurrencyType type in Enum.GetValues(typeof(CurrencyType)))
-                _amounts[type] = _saveService.Load(SaveKeyPrefix + type, 0);
+            _vault = vault;
+            _settings = settings;
         }
 
-        public int Get(CurrencyType type) => _amounts[type];
+        public int Get(CurrencyType type) => _vault.Get(type);
 
         public void Add(CurrencyType type, int amount)
         {
             if (amount <= 0) return;
-            SetInternal(type, _amounts[type] + amount);
+            SetInternal(type, _vault.Get(type) + amount);
         }
 
         public bool TrySpend(CurrencyType type, int amount)
@@ -38,27 +31,31 @@ namespace Plugins.CurrencyService
                 {
                     Type = type,
                     Required = amount,
-                    Available = _amounts[type]
+                    Available = _vault.Get(type)
                 });
                 return false;
             }
 
-            SetInternal(type, _amounts[type] - amount);
+            SetInternal(type, _vault.Get(type) - amount);
             return true;
         }
 
-        public bool Has(CurrencyType type, int amount) => _amounts[type] >= amount;
+        public bool Has(CurrencyType type, int amount) => _vault.Get(type) >= amount;
 
         public void Set(CurrencyType type, int amount) => SetInternal(type, amount);
 
         private void SetInternal(CurrencyType type, int newAmount)
         {
-            newAmount = newAmount < 0 ? 0 : newAmount;
-            var old = _amounts[type];
+            var def = _settings.GetDefinition(type);
+            if (def.MaxAmount > 0 && newAmount > def.MaxAmount)
+                newAmount = def.MaxAmount;
+            if (newAmount < 0)
+                newAmount = 0;
+
+            var old = _vault.Get(type);
             if (old == newAmount) return;
 
-            _amounts[type] = newAmount;
-            _saveService.Save(SaveKeyPrefix + type, newAmount);
+            _vault.Set(type, newAmount);
             _eventBus.Publish(new CurrencyChanged { Type = type, OldAmount = old, NewAmount = newAmount });
         }
     }

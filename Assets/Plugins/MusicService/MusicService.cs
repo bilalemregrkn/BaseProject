@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using Plugins.SaveService;
 using PrimeTween;
 using UnityEngine;
 
@@ -7,48 +6,41 @@ namespace Plugins.MusicService
 {
     public sealed class MusicService : MonoBehaviour, IMusicService
     {
-        private const string VolumeKey = "music_volume";
-        private const string MutedKey = "music_muted";
-
-        private ISaveService _saveManager;
+        private MusicVault _vault;
+        private MusicSettings _settings;
         private AudioSource _sourceA;
         private AudioSource _sourceB;
         private bool _usingA = true;
-        private float _volume = 1f;
-        private bool _muted;
 
         public float Volume
         {
-            get => _volume;
+            get => _vault.Volume;
             set
             {
-                _volume = Mathf.Clamp01(value);
-                ActiveSource.volume = _muted ? 0f : _volume;
-                _saveManager.Save(VolumeKey, _volume);
+                _vault.SaveVolume(Mathf.Clamp01(value));
+                ActiveSource.volume = _vault.Muted ? 0f : _vault.Volume;
             }
         }
 
         public bool Muted
         {
-            get => _muted;
+            get => _vault.Muted;
             set
             {
-                _muted = value;
-                ActiveSource.volume = _muted ? 0f : _volume;
-                _saveManager.Save(MutedKey, _muted);
+                _vault.SaveMuted(value);
+                ActiveSource.volume = _vault.Muted ? 0f : _vault.Volume;
             }
         }
 
         public bool IsPlaying => ActiveSource.isPlaying;
 
-        private AudioSource ActiveSource => _usingA ? _sourceA : _sourceB;
+        private AudioSource ActiveSource   => _usingA ? _sourceA : _sourceB;
         private AudioSource InactiveSource => _usingA ? _sourceB : _sourceA;
 
-        public void Init(ISaveService saveManager)
+        public void Init(MusicVault vault, MusicSettings settings)
         {
-            _saveManager = saveManager;
-            _volume = _saveManager.Load(VolumeKey, 1f);
-            _muted = _saveManager.Load(MutedKey, false);
+            _vault = vault;
+            _settings = settings;
 
             _sourceA = gameObject.AddComponent<AudioSource>();
             _sourceB = gameObject.AddComponent<AudioSource>();
@@ -63,7 +55,7 @@ namespace Plugins.MusicService
             var source = ActiveSource;
             source.clip = clip;
             source.loop = loop;
-            source.volume = _muted ? 0f : _volume;
+            source.volume = _vault.Muted ? 0f : _vault.Volume;
             source.Play();
         }
 
@@ -73,14 +65,14 @@ namespace Plugins.MusicService
             ActiveSource.clip = null;
         }
 
-        public void Pause() => ActiveSource.Pause();
-
+        public void Pause()  => ActiveSource.Pause();
         public void Resume() => ActiveSource.UnPause();
 
-        public async UniTask CrossfadeAsync(AudioClip clip, float duration = 1f, bool loop = true)
+        public async UniTask CrossfadeAsync(AudioClip clip, float duration = -1f, bool loop = true)
         {
             if (clip == null) return;
 
+            var fadeDuration = duration < 0f ? _settings.FadeDuration : duration;
             var outSource = ActiveSource;
             _usingA = !_usingA;
             var inSource = ActiveSource;
@@ -90,11 +82,11 @@ namespace Plugins.MusicService
             inSource.volume = 0f;
             inSource.Play();
 
-            var targetVolume = _muted ? 0f : _volume;
+            var targetVolume = _vault.Muted ? 0f : _vault.Volume;
 
             await UniTask.WhenAll(
-                Tween.AudioVolume(outSource, 0f, duration).ToUniTask(),
-                Tween.AudioVolume(inSource, targetVolume, duration).ToUniTask()
+                Tween.AudioVolume(outSource, 0f, fadeDuration).ToUniTask(),
+                Tween.AudioVolume(inSource, targetVolume, fadeDuration).ToUniTask()
             );
 
             outSource.Stop();

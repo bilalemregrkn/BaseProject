@@ -1,0 +1,17 @@
+using UnityEngine;
+using UnityEngine.Audio;
+
+namespace Plugins.MusicService
+{
+    [CreateAssetMenu(menuName = "Game/Music Settings", fileName = "MusicSettings")]
+    public class MusicSettings : ScriptableObject
+    {
+        [SerializeField] private AudioMixerGroup _mixerGroup;
+        [SerializeField] [Range(0f, 1f)] private float _defaultVolume = 1f;
+        [SerializeField] private float _fadeDuration = 1f;
+
+        public AudioMixerGroup MixerGroup => _mixerGroup;
+        public float DefaultVolume => _defaultVolume;
+        public float FadeDuration => _fadeDuration;
+    }
+}

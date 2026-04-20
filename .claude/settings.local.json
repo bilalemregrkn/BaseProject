@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -i reflex find /Users/bilalemregurkan/reposMy/BaseProject/Packages -name \"*.asmdef.meta\")",
+      "Bash(python3 *)",
+      "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject status)",
+      "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject diff)",
+      "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject add Assets/Plugins/CurrencyService/ Assets/\\\\!Game/Game.App.asmdef Packages/manifest.json)",
+      "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject commit -m ' *)"
+    ]
+  }
+}

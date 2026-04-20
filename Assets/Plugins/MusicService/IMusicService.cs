@@ -13,6 +13,6 @@ namespace Plugins.MusicService
         void Stop();
         void Pause();
         void Resume();
-        UniTask CrossfadeAsync(AudioClip clip, float duration = 1f, bool loop = true);
+        UniTask CrossfadeAsync(AudioClip clip, float duration = -1f, bool loop = true);
     }
 }
