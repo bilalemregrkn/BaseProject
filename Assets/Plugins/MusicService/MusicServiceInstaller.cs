@@ -10,8 +10,8 @@ namespace Plugins.MusicService
 
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.RegisterInstance(_settings);
-            builder.RegisterType(typeof(MusicVault), new[] { typeof(MusicVault) }, Lifetime.Singleton, Resolution.Lazy);
+            builder.RegisterValue(_settings);
+            builder.RegisterType(typeof(MusicVault), new[] { typeof(MusicVault) }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
 
             builder.RegisterFactory<IMusicService>(container =>
             {
@@ -20,7 +20,7 @@ namespace Plugins.MusicService
                 var service = go.AddComponent<MusicService>();
                 service.Init(container.Single<MusicVault>(), container.Single<MusicSettings>());
                 return service;
-            }, Lifetime.Singleton, Resolution.Lazy);
+            }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
         }
     }
 }

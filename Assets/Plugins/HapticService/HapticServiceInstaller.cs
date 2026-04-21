@@ -10,9 +10,9 @@ namespace Plugins.HapticService
 
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.RegisterInstance(_settings);
-            builder.RegisterType(typeof(HapticVault),    new[] { typeof(HapticVault) },    Lifetime.Singleton, Resolution.Lazy);
-            builder.RegisterType(typeof(HapticService),  new[] { typeof(IHapticService) }, Lifetime.Singleton, Resolution.Lazy);
+            builder.RegisterValue(_settings);
+            builder.RegisterType(typeof(HapticVault),    new[] { typeof(HapticVault) },    Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+            builder.RegisterType(typeof(HapticService),  new[] { typeof(IHapticService) }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
         }
     }
 }

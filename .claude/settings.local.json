@@ -6,7 +6,14 @@
       "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject status)",
       "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject diff)",
       "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject add Assets/Plugins/CurrencyService/ Assets/\\\\!Game/Game.App.asmdef Packages/manifest.json)",
-      "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject commit -m ' *)"
+      "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject commit -m ' *)",
+      "Bash(git -C /Users/bilalemregurkan/reposMy/BaseProject add Assets/Plugins/AudioService/AudioService.cs Assets/Plugins/AudioService/AudioServiceInstaller.cs Assets/Plugins/CurrencyService/CurrencyService.cs Assets/Plugins/CurrencyService/CurrencyServiceInstaller.cs Assets/Plugins/HapticService/HapticService.cs Assets/Plugins/HapticService/HapticServiceInstaller.cs Assets/Plugins/MusicService/IMusicService.cs Assets/Plugins/MusicService/MusicService.cs Assets/Plugins/MusicService/MusicServiceInstaller.cs)",
+      "WebFetch(domain:openupm.com)",
+      "WebFetch(domain:package.openupm.com)",
+      "Bash(gh api *)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:www.nuget.org)",
+      "Bash(unzip -l /tmp/zlinq.nupkg)"
     ]
   }
 }

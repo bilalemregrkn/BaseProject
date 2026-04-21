@@ -10,9 +10,9 @@ namespace Plugins.CurrencyService
 
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.RegisterInstance(_settings);
-            builder.RegisterType(typeof(CurrencyVault),    new[] { typeof(CurrencyVault) },    Lifetime.Singleton, Resolution.Lazy);
-            builder.RegisterType(typeof(CurrencyService),  new[] { typeof(ICurrencyService) }, Lifetime.Singleton, Resolution.Lazy);
+            builder.RegisterValue(_settings);
+            builder.RegisterType(typeof(CurrencyVault),    new[] { typeof(CurrencyVault) },    Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+            builder.RegisterType(typeof(CurrencyService),  new[] { typeof(ICurrencyService) }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
         }
     }
 }

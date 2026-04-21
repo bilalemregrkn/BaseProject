@@ -46,7 +46,7 @@
         },
         {
           "name": "com.kyrylokuzyk.primetween",
-          "expression": "[1.3.8-pro]",
+          "expression": "[1.4.0-pro]",
           "define": "PRIME_TWEEN_PRO"
         }
     ],

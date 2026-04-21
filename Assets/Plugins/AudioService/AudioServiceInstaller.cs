@@ -10,8 +10,8 @@ namespace Plugins.AudioService
 
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.RegisterInstance(_settings);
-            builder.RegisterType(typeof(AudioVault), new[] { typeof(AudioVault) }, Lifetime.Singleton, Resolution.Lazy);
+            builder.RegisterValue(_settings);
+            builder.RegisterType(typeof(AudioVault), new[] { typeof(AudioVault) }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
 
             builder.RegisterFactory<IAudioService>(container =>
             {
@@ -20,7 +20,7 @@ namespace Plugins.AudioService
                 var service = go.AddComponent<AudioService>();
                 service.Init(container.Single<AudioVault>());
                 return service;
-            }, Lifetime.Singleton, Resolution.Lazy);
+            }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
         }
     }
 }
