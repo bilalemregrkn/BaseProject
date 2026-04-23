@@ -15,7 +15,7 @@ namespace Plugins.CurrencyService
             _saveService = saveService;
 
             foreach (var def in settings.Currencies)
-                _amounts[def.Type] = _saveService.Load(KeyPrefix + def.Type, def.StartingAmount);
+                _amounts[def.Id] = _saveService.Load(KeyPrefix + def.Id, def.StartingAmount);
         }
 
         public int Get(string type)

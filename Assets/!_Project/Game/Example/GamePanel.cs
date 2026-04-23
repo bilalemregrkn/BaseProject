@@ -26,7 +26,6 @@ namespace Game.Example
 
         private void Start()
         {
-            // Injection is complete by Start; safe to use injected fields here
             _panelService.Register(PanelIds.Game, this);
         }
 
@@ -61,7 +60,7 @@ namespace Game.Example
         private void RefreshScore(int score)
         {
             _scoreText.text = $"Score: {score}";
-
+            
             if (score > _highScore)
             {
                 _highScore = score;

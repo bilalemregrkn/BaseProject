@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 175424607e8d54bf7ba31a089bda6632, type: 3}
   m_Name: Gem
-  m_EditorClassIdentifier:
-  _type: Gem
+  m_EditorClassIdentifier: 
+  _id: gem
   _displayName: Gem
   _icon: {fileID: 0}
   _startingAmount: 0

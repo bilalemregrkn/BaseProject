@@ -14,7 +14,7 @@ namespace Plugins.CurrencyService
         public BaseCurrency GetCurrency(string type)
         {
             foreach (var def in currencies)
-                if (def.Type == type)
+                if (def.Id == type)
                     return def;
 
             return null;
@@ -52,8 +52,9 @@ namespace Plugins.CurrencyService
             sb.AppendLine("    {");
             foreach (var c in currencies)
             {
-                var identifier = System.Text.RegularExpressions.Regex.Replace(c.Type, @"[^a-zA-Z0-9_]", "_");
-                sb.AppendLine($"        public const string {identifier} = \"{c.Type}\";");
+                var raw = System.Text.RegularExpressions.Regex.Replace(c.Id, @"[^a-zA-Z0-9_]", "_");
+                var identifier = char.ToUpper(raw[0]) + raw.Substring(1);
+                sb.AppendLine($"        public const string {identifier} = \"{c.Id}\";");
             }
             sb.AppendLine("    }");
             sb.Append("}");

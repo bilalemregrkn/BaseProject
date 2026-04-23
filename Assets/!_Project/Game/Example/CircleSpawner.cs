@@ -12,7 +12,6 @@ namespace Game.Example
         [SerializeField] private CircleButton _circlePrefab;
         [SerializeField] private RectTransform _spawnArea;
         [SerializeField] private float _spawnInterval = 1.5f;
-        [SerializeField] private float _circleLifetime = 3f;
 
         [Inject] private IUpdateService _updateService;
         [Inject] private ICurrencyService _currencyService;
@@ -47,7 +46,7 @@ namespace Game.Example
         private void SpawnCircle()
         {
             var circle = Instantiate(_circlePrefab, _spawnArea);
-            circle.Init(OnCircleClicked, _circleLifetime);
+            circle.Init(OnCircleClicked);
 
             var rect = _spawnArea.rect;
             circle.RectTransform.anchoredPosition = new Vector2(
@@ -62,6 +61,7 @@ namespace Game.Example
         {
             _currencyService.Add(CurrencyType.Gold, 1);
             _eventBus.Publish(new CircleClickedEvent());
+            _timer = _spawnInterval;
         }
 
         public void SetActive(bool active) => _active = active;
