@@ -1,0 +1,16 @@
+{
+    "name": "PlayerPrefsTool.Editor",
+    "rootNamespace": "Tool.PlayerPrefsTool",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
