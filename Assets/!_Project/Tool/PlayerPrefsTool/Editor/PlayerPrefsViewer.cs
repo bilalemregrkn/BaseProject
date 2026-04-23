@@ -92,6 +92,15 @@ namespace Tool.PlayerPrefsTool
 #endif
         }
 
+        private static string UnwrapJson(string raw)
+        {
+            if (string.IsNullOrEmpty(raw)) return raw;
+            var trimmed = raw.Trim();
+            if (!trimmed.StartsWith("{")) return raw;
+            var match = System.Text.RegularExpressions.Regex.Match(trimmed, @"""Value""\s*:\s*(.+?)\s*[,}]");
+            return match.Success ? match.Groups[1].Value.Trim('"') : raw;
+        }
+
 #if UNITY_EDITOR_WIN
         private void ReadWindows()
         {
@@ -103,8 +112,8 @@ namespace Tool.PlayerPrefsTool
             {
                 // Registry names have a hash suffix like _hXXXXXXXX — strip it
                 var cleanKey = System.Text.RegularExpressions.Regex.Replace(name, @"_h\d+$", "");
-                var val = key.GetValue(name);
-                _entries.Add((cleanKey, val?.ToString() ?? ""));
+                var val = key.GetValue(name)?.ToString() ?? "";
+                _entries.Add((cleanKey, UnwrapJson(val)));
             }
         }
 #elif UNITY_EDITOR_OSX
@@ -135,7 +144,7 @@ namespace Tool.PlayerPrefsTool
 
                 var k = trimmed.Substring(0, eq).Trim();
                 var v = trimmed.Substring(eq + 3).Trim().Trim('"');
-                _entries.Add((k, v));
+                _entries.Add((k, UnwrapJson(v)));
             }
         }
 #endif

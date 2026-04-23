@@ -13,7 +13,6 @@ namespace Game.Example
 
         private void Start()
         {
-            _currencyService.Set(CurrencyType.Gold, 0);
             _panelService.ShowAsync(PanelIds.Game).Forget();
         }
     }

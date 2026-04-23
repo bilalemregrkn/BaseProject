@@ -16,10 +16,17 @@ namespace Plugins.SaveService
         {
             if (string.IsNullOrEmpty(key)) return;
 
-            var json = JsonUtility.ToJson(new Wrapper<T>(data));
-            PlayerPrefs.SetString(key, json);
-            PlayerPrefs.Save();
+            switch (data)
+            {
+                case int i:    PlayerPrefs.SetInt(key, i);    break;
+                case float f:  PlayerPrefs.SetFloat(key, f);  break;
+                case string s: PlayerPrefs.SetString(key, s); break;
+                default:
+                    PlayerPrefs.SetString(key, JsonUtility.ToJson(data));
+                    break;
+            }
 
+            PlayerPrefs.Save();
             _eventBus.Publish(new DataSaved(key));
         }
 
@@ -28,8 +35,11 @@ namespace Plugins.SaveService
             if (string.IsNullOrEmpty(key) || !PlayerPrefs.HasKey(key))
                 return defaultValue;
 
-            var json = PlayerPrefs.GetString(key);
-            return JsonUtility.FromJson<Wrapper<T>>(json).Value;
+            if (typeof(T) == typeof(int))    return (T)(object)PlayerPrefs.GetInt(key);
+            if (typeof(T) == typeof(float))  return (T)(object)PlayerPrefs.GetFloat(key);
+            if (typeof(T) == typeof(string)) return (T)(object)PlayerPrefs.GetString(key);
+
+            return JsonUtility.FromJson<T>(PlayerPrefs.GetString(key));
         }
 
         public bool HasKey(string key) => !string.IsNullOrEmpty(key) && PlayerPrefs.HasKey(key);
@@ -50,14 +60,6 @@ namespace Plugins.SaveService
             PlayerPrefs.Save();
 
             _eventBus.Publish(new AllDataDeleted());
-        }
-
-        [System.Serializable]
-        private class Wrapper<T>
-        {
-            public T Value;
-
-            public Wrapper(T value) => Value = value;
         }
     }
 }
