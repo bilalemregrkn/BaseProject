@@ -55,5 +55,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: def43e6633d649a1ba0a2c14d74fdc5a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::RootInstaller
+  _currencySettings: {fileID: 11400000, guid: dbbf6f23357614cd5a0af1a7cd9ec131, type: 2}

@@ -15,15 +15,15 @@ namespace Plugins.CurrencyService
             _settings = settings;
         }
 
-        public int Get(CurrencyType type) => _vault.Get(type);
+        public int Get(string type) => _vault.Get(type);
 
-        public void Add(CurrencyType type, int amount)
+        public void Add(string type, int amount)
         {
             if (amount <= 0) return;
             SetInternal(type, _vault.Get(type) + amount);
         }
 
-        public bool TrySpend(CurrencyType type, int amount)
+        public bool TrySpend(string type, int amount)
         {
             if (!Has(type, amount))
             {
@@ -40,14 +40,14 @@ namespace Plugins.CurrencyService
             return true;
         }
 
-        public bool Has(CurrencyType type, int amount) => _vault.Get(type) >= amount;
+        public bool Has(string type, int amount) => _vault.Get(type) >= amount;
 
-        public void Set(CurrencyType type, int amount) => SetInternal(type, amount);
+        public void Set(string type, int amount) => SetInternal(type, amount);
 
-        private void SetInternal(CurrencyType type, int newAmount)
+        private void SetInternal(string type, int newAmount)
         {
-            var def = _settings.GetDefinition(type);
-            if (def.MaxAmount > 0 && newAmount > def.MaxAmount)
+            var def = _settings.GetCurrency(type);
+            if (def != null && def.MaxAmount > 0 && newAmount > def.MaxAmount)
                 newAmount = def.MaxAmount;
             if (newAmount < 0)
                 newAmount = 0;

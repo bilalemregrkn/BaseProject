@@ -8,19 +8,25 @@ namespace Plugins.CurrencyService
         private const string KeyPrefix = "currency_";
 
         private readonly ISaveService _saveService;
-        private readonly Dictionary<CurrencyType, int> _amounts = new();
+        private readonly Dictionary<string, int> _amounts = new();
 
         public CurrencyVault(ISaveService saveService, CurrencySettings settings)
         {
             _saveService = saveService;
 
-            foreach (var def in settings.Definitions)
+            foreach (var def in settings.Currencies)
                 _amounts[def.Type] = _saveService.Load(KeyPrefix + def.Type, def.StartingAmount);
         }
 
-        public int Get(CurrencyType type) => _amounts.TryGetValue(type, out var v) ? v : 0;
+        public int Get(string type)
+        {
+            if (_amounts.TryGetValue(type, out var v)) return v;
+            var loaded = _saveService.Load(KeyPrefix + type, 0);
+            _amounts[type] = loaded;
+            return loaded;
+        }
 
-        public void Set(CurrencyType type, int amount)
+        public void Set(string type, int amount)
         {
             _amounts[type] = amount;
             _saveService.Save(KeyPrefix + type, amount);

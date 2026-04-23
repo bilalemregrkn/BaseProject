@@ -1,9 +1,8 @@
 namespace Plugins.CurrencyService
 {
-    public enum CurrencyType
+    public static class CurrencyType
     {
-        Gem,
-        Gold,
-        Life
+        public const string Gem = "Gem";
+        public const string Gold = "Gold";
     }
 }

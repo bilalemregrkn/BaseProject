@@ -13,7 +13,17 @@
       "Bash(gh api *)",
       "WebFetch(domain:api.github.com)",
       "WebFetch(domain:www.nuget.org)",
-      "Bash(unzip -l /tmp/zlinq.nupkg)"
+      "Bash(unzip -l /tmp/zlinq.nupkg)",
+      "Bash(xargs cat *)",
+      "Bash(find /Users/bilalemregurkan/reposMy/BaseProject/Library/PackageCache/com.gustavopsantos.reflex* -name \"ContainerBuilder.cs\")",
+      "Bash(find /Users/bilalemregurkan/reposMy/BaseProject/Library/PackageCache/com.gustavopsantos.reflex* -name \"IInstaller.cs\")",
+      "Bash(find /Users/bilalemregurkan/reposMy/BaseProject/Library/PackageCache/com.gustavopsantos.reflex* -name \"ContainerScope.cs\")",
+      "Bash(find /Users/bilalemregurkan/reposMy/BaseProject/Library/PackageCache/com.gustavopsantos.reflex* -name \"InjectAttribute.cs\" -o -name \"*.cs\")",
+      "Bash(find /Users/bilalemregurkan/reposMy/BaseProject/Library/PackageCache/com.gustavopsantos.reflex* -name \"*.cs\")",
+      "Bash(find /Users/bilalemregurkan/reposMy/BaseProject/Library/PackageCache/com.gustavopsantos.reflex* -name \"*.asmdef.meta\")",
+      "Bash(xargs ls *)",
+      "Bash(xargs -I{} head -20 \"{}\")",
+      "Bash(xargs -I{} bash -c 'echo \"=== {} ===\" && cat \"{}\"')"
     ]
   }
 }

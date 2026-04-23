@@ -28,7 +28,6 @@ namespace Plugins.PanelService
 
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = true;
-            gameObject.SetActive(true);
 
             await Tween.Alpha(_canvasGroup, 1f, _fadeDuration);
 
@@ -46,7 +45,6 @@ namespace Plugins.PanelService
             await Tween.Alpha(_canvasGroup, 0f, _fadeDuration);
 
             _canvasGroup.blocksRaycasts = false;
-            gameObject.SetActive(false);
             OnHidden();
         }
 
@@ -56,7 +54,6 @@ namespace Plugins.PanelService
             _canvasGroup.alpha = visible ? 1f : 0f;
             _canvasGroup.interactable = visible;
             _canvasGroup.blocksRaycasts = visible;
-            gameObject.SetActive(visible);
         }
 
         protected virtual void OnShown() { }
