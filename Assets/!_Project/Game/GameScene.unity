@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b16c1a767d547b3b6e177539468eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Example::Game.Example.GamePanel
+  _id: 
   _fadeDuration: 0.25
   _scoreText: {fileID: 1029904184}
   _highScoreText: {fileID: 651159677}
@@ -950,7 +951,7 @@ GameObject:
   - component: {fileID: 1191376437}
   - component: {fileID: 1191376440}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Installer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
