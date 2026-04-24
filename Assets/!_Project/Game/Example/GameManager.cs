@@ -6,7 +6,14 @@ using UnityEngine;
 
 namespace Game.Example
 {
-    public class GameEntryPoint : MonoBehaviour
+    public enum GameState
+    {
+        Start,
+        Working,
+        Completed
+    }
+    
+    public class GameManager : MonoBehaviour
     {
         [Inject] private IPanelService _panelService;
         [Inject] private ICurrencyService _currencyService;

@@ -1,13 +1,14 @@
 using Plugins.CurrencyService;
 using Plugins.EventBus;
 using Plugins.PanelService;
+using Plugins.SaveService;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
 
 namespace Game.Example
 {
-    public class GamePanel : BasePanel
+    public class PanelGamePlay : BasePanel
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private TextMeshProUGUI _highScoreText;
@@ -15,13 +16,15 @@ namespace Game.Example
         [Inject] private IEventBus _eventBus;
         [Inject] private ICurrencyService _currencyService;
         [Inject] private IPanelService _panelService;
+        [Inject] private ISaveService _saveService;
 
+        private const string HighScoreKey = "ClickGame_HighScore";
         private int _highScore;
 
         protected override void Awake()
         {
             base.Awake();
-            _highScore = PlayerPrefs.GetInt("ClickGame_HighScore", 0);
+            _highScore = _saveService.Load(HighScoreKey, 0);
         }
 
         private void Start()
@@ -37,7 +40,6 @@ namespace Game.Example
 
         private void OnEnable()
         {
-            // Guard: OnEnable fires during base.Awake() before injection is done
             _eventBus?.Subscribe<CurrencyChanged>(OnCurrencyChanged);
         }
 
@@ -48,7 +50,7 @@ namespace Game.Example
 
         protected override void OnShown()
         {
-            RefreshScore(_currencyService.Get(CurrencyType.Gold));
+            RefreshScore(0);
         }
 
         private void OnCurrencyChanged(CurrencyChanged e)
@@ -60,11 +62,11 @@ namespace Game.Example
         private void RefreshScore(int score)
         {
             _scoreText.text = $"Score: {score}";
-            
+
             if (score > _highScore)
             {
                 _highScore = score;
-                PlayerPrefs.SetInt("ClickGame_HighScore", _highScore);
+                _saveService.Save(HighScoreKey, _highScore);
             }
 
             _highScoreText.text = $"Best: {_highScore}";
