@@ -24,11 +24,11 @@ namespace Game.Example
         protected override void Awake()
         {
             base.Awake();
-            _highScore = _saveService.Load(HighScoreKey, 0);
         }
 
         private void Start()
         {
+            _highScore = _saveService.Load(HighScoreKey, 0);
             _panelService.Register(PanelIds.Game, this);
         }
 
