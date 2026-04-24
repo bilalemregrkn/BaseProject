@@ -11,6 +11,13 @@ namespace Plugins.PanelService
 
         public IReadOnlyList<BasePanel> Panels => _panels;
 
+        public BasePanel GetPrefab(string id)
+        {
+            foreach (var panel in _panels)
+                if (panel.Id == id) return panel;
+            return null;
+        }
+
 #if UNITY_EDITOR
         [Button]
         private void Refresh()
