@@ -1,43 +1,71 @@
+using Plugins.EventBus;
 using UnityEngine;
 
 namespace Plugins.AudioService
 {
-    public sealed class AudioService : MonoBehaviour, IAudioService
+    public sealed class AudioService : IAudioService
     {
-        private AudioVault _vault;
+        private readonly IEventBus _eventBus;
+        private readonly AudioVault _vault;
+        private readonly AudioPlayer _player;
+        private readonly AudioSettings _settings;
+
+        public AudioService(IEventBus eventBus, AudioVault vault, AudioPlayer player, AudioSettings settings)
+        {
+            _eventBus = eventBus;
+            _vault = vault;
+            _player = player;
+            _settings = settings;
+        }
 
         public float Volume
         {
             get => _vault.Volume;
-            set => _vault.SaveVolume(Mathf.Clamp01(value));
+            set
+            {
+                var clamped = Mathf.Clamp01(value);
+                var old = _vault.Volume;
+                if (Mathf.Approximately(old, clamped)) return;
+                _vault.SaveVolume(clamped);
+                _eventBus.Publish(new VolumeChanged { OldVolume = old, NewVolume = clamped });
+            }
         }
 
         public bool Muted
         {
             get => _vault.Muted;
-            set => _vault.SaveMuted(value);
+            set
+            {
+                if (_vault.Muted == value) return;
+                _vault.SaveMuted(value);
+                _eventBus.Publish(new MuteChanged { Muted = value });
+            }
         }
 
-        public void Init(AudioVault vault) => _vault = vault;
+        public void Play(string id, float volume = 1f, float pitch = 1f)
+        {
+            var audio = _settings.GetAudio(id);
+            if (audio == null) return;
+            Play(audio.Clip, audio.Volume * volume, audio.Pitch * pitch);
+        }
+
+        public void PlayAt(string id, Vector3 position, float volume = 1f)
+        {
+            var audio = _settings.GetAudio(id);
+            if (audio == null) return;
+            PlayAt(audio.Clip, position, audio.Volume * volume);
+        }
 
         public void Play(AudioClip clip, float volume = 1f, float pitch = 1f)
         {
             if (_vault.Muted || clip == null) return;
-
-            var source = GetPooledSource();
-            source.pitch = pitch;
-            source.PlayOneShot(clip, _vault.Volume * volume);
+            _player.Play(clip, _vault.Volume * volume, pitch);
         }
 
         public void PlayAt(AudioClip clip, Vector3 position, float volume = 1f)
         {
             if (_vault.Muted || clip == null) return;
-            AudioSource.PlayClipAtPoint(clip, position, _vault.Volume * volume);
-        }
-
-        private AudioSource GetPooledSource()
-        {
-            return gameObject.GetComponent<AudioSource>() ?? gameObject.AddComponent<AudioSource>();
+            _player.PlayAt(clip, position, _vault.Volume * volume);
         }
     }
 }

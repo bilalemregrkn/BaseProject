@@ -1,3 +1,5 @@
+using Plugins.AudioService;
+using AudioSettings = Plugins.AudioService.AudioSettings;
 using Plugins.CurrencyService;
 using Plugins.EventBus;
 using Plugins.PanelService;
@@ -11,6 +13,7 @@ using UnityEngine;
 public class RootInstaller : MonoBehaviour, IInstaller
 {
     [SerializeField] private CurrencySettings _currencySettings;
+    [SerializeField] private AudioSettings _audioSettings;
 
     public void InstallBindings(ContainerBuilder builder)
     {
@@ -37,5 +40,16 @@ public class RootInstaller : MonoBehaviour, IInstaller
         builder.RegisterValue(_currencySettings);
         builder.RegisterType(typeof(CurrencyVault),   new[] { typeof(CurrencyVault) },   Lifetime.Singleton, Resolution.Lazy);
         builder.RegisterType(typeof(CurrencyService), new[] { typeof(ICurrencyService) }, Lifetime.Singleton, Resolution.Lazy);
+
+        // AudioService
+        builder.RegisterValue(_audioSettings);
+        builder.RegisterType(typeof(AudioVault),   new[] { typeof(AudioVault) },   Lifetime.Singleton, Resolution.Lazy);
+        builder.RegisterFactory<AudioPlayer>(_ =>
+        {
+            var go = new GameObject("AudioPlayer");
+            DontDestroyOnLoad(go);
+            return go.AddComponent<AudioPlayer>();
+        }, Lifetime.Singleton, Resolution.Lazy);
+        builder.RegisterType(typeof(AudioService), new[] { typeof(IAudioService) }, Lifetime.Singleton, Resolution.Lazy);
     }
 }

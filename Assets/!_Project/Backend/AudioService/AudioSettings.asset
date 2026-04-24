@@ -11,6 +11,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da6bd2354bdf347979398357fdf66f52, type: 3}
   m_Name: AudioSettings
-  m_EditorClassIdentifier:
-  _mixer: {fileID: 0}
+  m_EditorClassIdentifier: 
+  _mixer: {fileID: 24100000, guid: 4c6f866e208c4431e93c34ab08016dba, type: 2}
   _defaultVolume: 1
+  _clips:
+  - {fileID: 11400000, guid: 79016c011d7c343458d119e469f80a05, type: 2}
+  - {fileID: 11400000, guid: 72e1ec98724a44cdc9e0886283ce1a01, type: 2}

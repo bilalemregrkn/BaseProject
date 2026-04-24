@@ -1,9 +1,12 @@
+using Plugins.AudioService;
 using Plugins.CurrencyService;
 using Plugins.EventBus;
 using Plugins.UpdateService;
 using PrimeTween;
 using Reflex.Attributes;
 using UnityEngine;
+using AudioType = Plugins.AudioService.AudioType;
+
 
 namespace Game.Example
 {
@@ -15,6 +18,7 @@ namespace Game.Example
 
         [Inject] private IUpdateService _updateService;
         [Inject] private ICurrencyService _currencyService;
+        [Inject] private IAudioService _audioService;
         [Inject] private IEventBus _eventBus;
 
         private float _timer;
@@ -59,6 +63,8 @@ namespace Game.Example
 
         private void OnCircleClicked()
         {
+            //Action
+            _audioService.Play(AudioType.Beep);
             _currencyService.Add(CurrencyType.Gold, 1);
             _eventBus.Publish(new CircleClickedEvent());
             _timer = _spawnInterval;

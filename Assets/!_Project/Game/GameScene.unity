@@ -154,7 +154,6 @@ MonoBehaviour:
   _circlePrefab: {fileID: -774355746540100329, guid: 0eebbde6946c745f882d1b2ced299e88, type: 3}
   _spawnArea: {fileID: 354894401}
   _spawnInterval: 1.5
-  _circleLifetime: 3
 --- !u!114 &354894398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +305,6 @@ MonoBehaviour:
   _fadeDuration: 0.25
   _scoreText: {fileID: 1029904184}
   _highScoreText: {fileID: 651159677}
-  _goldText: {fileID: 551973231}
 --- !u!1 &456938330
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +522,7 @@ GameObject:
   - component: {fileID: 551973233}
   - component: {fileID: 551973232}
   - component: {fileID: 551973231}
+  - component: {fileID: 551973234}
   m_Layer: 5
   m_Name: Text Gold
   m_TagString: Untagged
@@ -650,6 +649,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &551973234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551973230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8dd0afd99eff42f3a70ef3878375c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.CurrencyService::Plugins.CurrencyService.TextCurrency
+  _currency: {fileID: 11400000, guid: f45800dc7e48945a3b389254bfda0ba4, type: 2}
+  _format: '{0}'
 --- !u!1 &651159676
 GameObject:
   m_ObjectHideFlags: 0

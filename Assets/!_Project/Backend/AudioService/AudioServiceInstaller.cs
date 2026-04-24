@@ -1,6 +1,7 @@
 using Reflex.Core;
 using Reflex.Enums;
 using UnityEngine;
+using Resolution = Reflex.Enums.Resolution;
 
 namespace Plugins.AudioService
 {
@@ -11,16 +12,14 @@ namespace Plugins.AudioService
         public void InstallBindings(ContainerBuilder builder)
         {
             builder.RegisterValue(_settings);
-            builder.RegisterType(typeof(AudioVault), new[] { typeof(AudioVault) }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
-
-            builder.RegisterFactory<IAudioService>(container =>
+            builder.RegisterType(typeof(AudioVault),  new[] { typeof(AudioVault) },   Lifetime.Singleton, Resolution.Lazy);
+            builder.RegisterFactory<AudioPlayer>(container =>
             {
-                var go = new GameObject("AudioService");
+                var go = new GameObject("AudioPlayer");
                 DontDestroyOnLoad(go);
-                var service = go.AddComponent<AudioService>();
-                service.Init(container.Single<AudioVault>());
-                return service;
-            }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+                return go.AddComponent<AudioPlayer>();
+            }, Lifetime.Singleton, Resolution.Lazy);
+            builder.RegisterType(typeof(AudioService), new[] { typeof(IAudioService) }, Lifetime.Singleton, Resolution.Lazy);
         }
     }
 }
