@@ -8,12 +8,14 @@ namespace Plugins.PanelService
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class BasePanel : SmartComponent, IPanel
     {
+        [SerializeField] private string _id;
         [SerializeField] private float _fadeDuration = 0.25f;
 
         private CanvasGroup _canvasGroup;
         private bool _isVisible;
 
-        public bool IsVisible => _isVisible;
+        public string Id        => _id;
+        public bool   IsVisible => _isVisible;
 
         protected virtual void Awake()
         {
