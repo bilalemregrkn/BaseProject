@@ -11,6 +11,12 @@ GameObject:
   - component: {fileID: 4526409688709044800}
   - component: {fileID: 2661368516412791695}
   - component: {fileID: -5589464301430627539}
+  - component: {fileID: -6374236136352597311}
+  - component: {fileID: 3591246173207549736}
+  - component: {fileID: -6202655565181656750}
+  - component: {fileID: 8257167895919248189}
+  - component: {fileID: -6652672830517770013}
+  - component: {fileID: -214997198555422956}
   m_Layer: 0
   m_Name: RootScope
   m_TagString: Untagged
@@ -57,5 +63,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def43e6633d649a1ba0a2c14d74fdc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RootInstaller
-  _currencySettings: {fileID: 11400000, guid: dbbf6f23357614cd5a0af1a7cd9ec131, type: 2}
-  _audioSettings: {fileID: 11400000, guid: e192fb4438b63456291016fb2ebab7ba, type: 2}
+--- !u!114 &-6374236136352597311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206273090256892044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1584478be39904c00a02ae7de0c3ed3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.PanelService::Plugins.PanelService.PanelServiceInstaller
+  _settings: {fileID: 11400000, guid: 8e40f0155711840fb956c6b1afd60dc5, type: 2}
+--- !u!114 &3591246173207549736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206273090256892044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca67bfed7852418d9df4c0d44c08dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.AudioService::Plugins.AudioService.AudioServiceInstaller
+  _settings: {fileID: 11400000, guid: e192fb4438b63456291016fb2ebab7ba, type: 2}
+--- !u!114 &-6202655565181656750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206273090256892044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e4796fdd8f04df5b996b2a8a3fcef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.CurrencyService::Plugins.CurrencyService.CurrencyServiceInstaller
+  _settings: {fileID: 11400000, guid: dbbf6f23357614cd5a0af1a7cd9ec131, type: 2}
+--- !u!114 &8257167895919248189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206273090256892044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c21bd05a447433dbf6e62d0db03d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.UpdateService::Plugins.UpdateService.UpdateServiceInstaller
+--- !u!114 &-6652672830517770013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206273090256892044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e566aff52c99e46809ee935404ee7c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.SaveService::Plugins.SaveService.SaveServiceInstaller
+--- !u!114 &-214997198555422956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206273090256892044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13bfd110eb879434f946fc4a2a4cf80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.EventBus::Plugins.EventBus.EventBusInstaller

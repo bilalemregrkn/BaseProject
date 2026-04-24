@@ -1,13 +1,22 @@
 using Reflex.Core;
+using Reflex.Enums;
 using UnityEngine;
+using Resolution = Reflex.Enums.Resolution;
 
 namespace Plugins.PanelService
 {
     public class PanelServiceInstaller : MonoBehaviour, IInstaller
     {
+        [SerializeField] private PanelServiceSettings _settings;
+
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.RegisterType(typeof(PanelService), new[] { typeof(IPanelService) }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+            var settings = _settings;
+            builder.RegisterFactory<IPanelService>(
+                c => new PanelService(settings, c),
+                Lifetime.Singleton,
+                Resolution.Lazy
+            );
         }
     }
 }
