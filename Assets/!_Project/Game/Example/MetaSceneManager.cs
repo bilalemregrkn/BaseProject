@@ -9,13 +9,7 @@ namespace Game.Example
     {
         public BaseButton startButton;
 
-        private ISceneService _sceneService;
-
-        [Inject]
-        private void Construct(ISceneService sceneService)
-        {
-            _sceneService = sceneService;
-        }
+        [Inject] private ISceneService _sceneService;
 
         private void Awake()
         {

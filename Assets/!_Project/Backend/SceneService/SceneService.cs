@@ -8,15 +8,15 @@ namespace Plugins.SceneService
 {
     public sealed class SceneService : ISceneService
     {
-        private IEventBus _eventBus;
-        private SceneSettings _settings;
+        private readonly IEventBus _eventBus;
+        private readonly SceneSettings _settings;
         private readonly HashSet<string> _loadedScenes = new(8);
         private bool _isLoading;
 
         public bool IsLoading => _isLoading;
         public string ActiveScene => UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
-        public void Init(IEventBus eventBus, SceneSettings settings)
+        public SceneService(IEventBus eventBus, SceneSettings settings)
         {
             _eventBus = eventBus;
             _settings = settings;

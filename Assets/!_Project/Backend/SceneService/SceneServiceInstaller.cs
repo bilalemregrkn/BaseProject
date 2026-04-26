@@ -1,5 +1,7 @@
 using Reflex.Core;
+using Reflex.Enums;
 using UnityEngine;
+using Resolution = Reflex.Enums.Resolution;
 
 namespace Plugins.SceneService
 {
@@ -9,12 +11,8 @@ namespace Plugins.SceneService
 
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.RegisterFactory<ISceneService>(container =>
-            {
-                var service = new SceneService();
-                service.Init(container.Single<Plugins.EventBus.IEventBus>(), _settings);
-                return service;
-            }, Reflex.Enums.Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+            builder.RegisterValue(_settings);
+            builder.RegisterType(typeof(SceneService), new[] { typeof(ISceneService) }, Lifetime.Singleton, Resolution.Lazy);
         }
     }
 }
