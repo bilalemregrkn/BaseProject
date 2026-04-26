@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8257167895919248189}
   - component: {fileID: -6652672830517770013}
   - component: {fileID: -214997198555422956}
+  - component: {fileID: 468830315060667044}
   m_Layer: 0
   m_Name: RootScope
   m_TagString: Untagged
@@ -138,3 +139,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bfd110eb879434f946fc4a2a4cf80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Plugins.EventBus::Plugins.EventBus.EventBusInstaller
+--- !u!114 &468830315060667044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206273090256892044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b32f0c3bd0f45ef902501bc83757b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.SceneService::Plugins.SceneService.SceneServiceInstaller
+  _settings: {fileID: 11400000, guid: 72d6325ca4bc040f0ba71d3afbeb0951, type: 2}

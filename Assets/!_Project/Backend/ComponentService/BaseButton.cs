@@ -5,11 +5,11 @@ namespace Tools.SmartComponent
 {
     public class BaseButton : SmartComponent
     {
-        private Button myButton => Get<Button>();
+        public Button MyButton => Get<Button>();
 
         private void Awake()
         {
-            myButton.onClick.AddListener(Click);
+            MyButton.onClick.AddListener(Click);
         }
 
         protected virtual void Click()

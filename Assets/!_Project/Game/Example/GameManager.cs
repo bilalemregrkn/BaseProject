@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Plugins.CurrencyService;
 using Plugins.PanelService;
@@ -12,7 +13,7 @@ namespace Game.Example
         Working,
         Completed
     }
-    
+
     public class GameManager : MonoBehaviour
     {
         [Inject] private IPanelService _panelService;
