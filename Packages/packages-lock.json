@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.cysharp.zlinq": {
+      "version": "https://github.com/Cysharp/ZLinq.git?path=src/ZLinq.Unity/Assets/ZLinq.Unity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f1f95d363131eb3eb740b621ce469782100f37ac"
+    },
     "com.github-glitchenzo.nugetforunity": {
       "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
       "depth": 0,

@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using UnityEditorInternal;
 using System.IO;
-using System.Linq;
+using ZLinq;
 using System;
 
 namespace FavTool.FavoriteAssets
@@ -195,7 +195,7 @@ namespace FavTool.FavoriteAssets
 
         private void DrawDetailsPanel()
         {
-            bool hasAnyExpandedEditor = _assetEditorStates.Any(pair => pair.Value.IsExpanded);
+            bool hasAnyExpandedEditor = _assetEditorStates.AsValueEnumerable().Any(pair => pair.Value.IsExpanded);
             if (hasAnyExpandedEditor)
             {
                 EditorGUILayout.LabelField("Asset Details", EditorStyles.boldLabel);
@@ -213,7 +213,7 @@ namespace FavTool.FavoriteAssets
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             SaveLayoutSettings();
 
-            foreach (var pair in _assetEditorStates.Where(p => p.Value.IsExpanded))
+            foreach (var pair in _assetEditorStates.AsValueEnumerable().Where(p => p.Value.IsExpanded))
             {
                 EditorGUILayout.Space(5);
 
@@ -457,9 +457,15 @@ namespace FavTool.FavoriteAssets
                 {
                     string draggedAssetPath = AssetDatabase.GetAssetPath(draggedObject);
 
-                    bool alreadyExists = _favoriteAssets.Any(existingAsset =>
-                        existingAsset != null &&
-                        AssetDatabase.GetAssetPath(existingAsset) == draggedAssetPath);
+                    bool alreadyExists = false;
+                    foreach (var existingAsset in _favoriteAssets)
+                    {
+                        if (existingAsset != null && AssetDatabase.GetAssetPath(existingAsset) == draggedAssetPath)
+                        {
+                            alreadyExists = true;
+                            break;
+                        }
+                    }
 
                     if (alreadyExists)
                         duplicateCount++;
