@@ -25,7 +25,9 @@
       "Bash(xargs -I{} head -20 \"{}\")",
       "Bash(xargs -I{} bash -c 'echo \"=== {} ===\" && cat \"{}\"')",
       "Bash(git remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
