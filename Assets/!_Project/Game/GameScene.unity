@@ -452,9 +452,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1191376439}
-  - component: {fileID: 1191376438}
   - component: {fileID: 1191376437}
+  - component: {fileID: 1191376438}
   - component: {fileID: 1191376440}
+  - component: {fileID: 1191376441}
   m_Layer: 0
   m_Name: Installer
   m_TagString: Untagged
@@ -513,6 +514,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4da97e787c8447409e8e46e641bb40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Example::Game.Example.GameEntryPoint
+--- !u!114 &1191376441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191376436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133920715c8540c3801014a75b6e2456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.PanelService::Plugins.PanelService.TestPanelService
+  id: 
 --- !u!1 &1417367524
 GameObject:
   m_ObjectHideFlags: 0

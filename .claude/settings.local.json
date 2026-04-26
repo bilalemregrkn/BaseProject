@@ -23,7 +23,9 @@
       "Bash(find /Users/bilalemregurkan/reposMy/BaseProject/Library/PackageCache/com.gustavopsantos.reflex* -name \"*.asmdef.meta\")",
       "Bash(xargs ls *)",
       "Bash(xargs -I{} head -20 \"{}\")",
-      "Bash(xargs -I{} bash -c 'echo \"=== {} ===\" && cat \"{}\"')"
+      "Bash(xargs -I{} bash -c 'echo \"=== {} ===\" && cat \"{}\"')",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }
