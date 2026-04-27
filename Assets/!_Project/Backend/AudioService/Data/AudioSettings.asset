@@ -15,5 +15,6 @@ MonoBehaviour:
   _mixer: {fileID: 24100000, guid: 4c6f866e208c4431e93c34ab08016dba, type: 2}
   _defaultVolume: 1
   _clips:
-  - {fileID: 11400000, guid: 79016c011d7c343458d119e469f80a05, type: 2}
-  - {fileID: 11400000, guid: 72e1ec98724a44cdc9e0886283ce1a01, type: 2}
+  - {fileID: 11400000, guid: bffad718eb6584794ba600abc8b47fe8, type: 2}
+  - {fileID: 11400000, guid: 3bdca3004dec0487788a880129dcb96f, type: 2}
+  - {fileID: 11400000, guid: 5162a18870d7d4ad8a5afd89f382a2db, type: 2}

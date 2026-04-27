@@ -1,0 +1,326 @@
+# Unity System Structure Guide for AI
+
+Use this structure when creating or refactoring a Unity system.
+
+Replace `X` with the system name.
+
+Example:
+- AbilitySystem
+- ShopSystem
+- RewardSystem
+- InventorySystem
+- SkillSystem
+
+---
+
+## Folder Structure
+
+XSystem/
+    IXService.cs
+    XService.cs
+    XInstaller.cs
+    XSettings.cs
+    XVault.cs
+    XType.cs
+    XConfig.cs
+    XData.cs
+
+---
+
+## File Responsibilities
+
+### IXService.cs
+
+Interface for the system service.
+
+Rules:
+- Use explicit interface naming.
+- Prefer IXService instead of IX.
+- Define only public actions/query methods.
+- Do not put implementation details here.
+
+Example:
+public interface IXService
+{
+    XData GetData(XType type);
+    void Execute(XType type);
+}
+
+---
+
+### XService.cs
+
+Main runtime logic of the system.
+
+Rules:
+- Implements IXService.
+- Contains core behavior.
+- Uses XSettings to get static data.
+- Uses XVault to read/write runtime state.
+- Should not directly depend on Unity scene objects unless required.
+- Keep logic readable and separated.
+
+Example:
+public class XService : IXService
+{
+    private readonly XSettings _settings;
+    private readonly XVault _vault;
+
+    public XService(XSettings settings, XVault vault)
+    {
+        _settings = settings;
+        _vault = vault;
+    }
+}
+
+---
+
+### XInstaller.cs
+
+Zenject installer for dependency injection.
+
+Rules:
+- Bind IXService to XService.
+- Bind XVault as single or per-context depending on system need.
+- Bind XSettings from inspector or resources.
+
+Example:
+Container.Bind<IXService>().To<XService>().AsSingle();
+Container.Bind<XVault>().AsSingle();
+
+---
+
+### XSettings.cs
+
+Registry / database for XData assets.
+
+Purpose:
+- Holds List<XData>.
+- Provides GetData(...) methods.
+- Can include editor-only buttons to fetch/refresh assets.
+
+Rules:
+- Use plural name: XSettings.
+- Keep lookup logic here.
+- Avoid putting gameplay logic here.
+- Prefer typed lookup over string lookup when possible.
+
+Preferred:
+GetData(XType type)
+
+Acceptable:
+GetData(string id)
+
+Example:
+public class XSettings : ScriptableObject
+{
+    public List<XData> DataList;
+
+    public XData GetData(XType type)
+    {
+        return DataList.FirstOrDefault(x => x.Type == type);
+    }
+}
+
+---
+
+### XVault.cs
+
+Runtime state container.
+
+Purpose:
+- Stores mutable data.
+- Stores save/session/progress values.
+- Keeps runtime state separate from static data.
+
+Rules:
+- Do not store static config here.
+- Do not put heavy business logic here.
+- Service should modify/read this class.
+
+Example:
+public class XVault
+{
+    public int CurrentLevel;
+    public Dictionary<XType, int> Values = new();
+}
+
+---
+
+### XType.cs
+
+Enum or type definitions.
+
+Purpose:
+- Keeps system type/category definitions in one place.
+- Avoids magic strings.
+
+Example:
+public enum XType
+{
+    None,
+    Basic,
+    Special,
+    Rare
+}
+
+---
+
+### XConfig.cs
+
+Plain runtime configuration class or struct.
+
+Purpose:
+- Used by code.
+- Can be created from XData.
+- Can be injected into services.
+- Should not be a ScriptableObject.
+
+Rules:
+- No Unity asset dependency.
+- Good for calculated or runtime-ready values.
+
+Example:
+public struct XConfig
+{
+    public XType Type;
+    public int Value;
+    public float Duration;
+}
+
+---
+
+### XData.cs
+
+ScriptableObject authoring data.
+
+Purpose:
+- Designer-facing asset.
+- Stores editable values.
+- Static data only.
+
+Rules:
+- No runtime state.
+- No save data.
+- No heavy logic.
+- Can create XConfig from itself if needed.
+
+Example:
+public class XData : ScriptableObject
+{
+    public string Id;
+    public XType Type;
+    public int Value;
+}
+
+---
+
+## Naming Rules
+
+Use PascalCase for files/classes.
+
+Correct:
+AbilitySystem/
+    IAbilityService.cs
+    AbilityService.cs
+    AbilityInstaller.cs
+    AbilitySettings.cs
+    AbilityVault.cs
+    AbilityType.cs
+    AbilityConfig.cs
+    AbilityData.cs
+
+Avoid:
+IAbility.cs
+AbilitySetting.cs
+AbilityBase.cs
+AbilityManager.cs
+
+---
+
+## Responsibility Summary
+
+XService
+- Does the work.
+- Contains system behavior.
+
+IXService
+- Contract for the service.
+
+XInstaller
+- Dependency injection bindings.
+
+XSettings
+- Registry and lookup for XData.
+
+XVault
+- Runtime/save/session state.
+
+XType
+- Enums and categories.
+
+XConfig
+- Runtime-ready config object.
+
+XData
+- ScriptableObject authoring data.
+
+---
+
+## Important Architecture Rules
+
+1. Keep static data and runtime state separate.
+
+Static data:
+- XData
+- XSettings
+
+Runtime state:
+- XVault
+
+Runtime logic:
+- XService
+
+2. Do not put gameplay logic inside ScriptableObjects.
+
+ScriptableObjects should mostly hold data.
+
+3. Avoid magic strings.
+
+Prefer:
+GetData(XType type)
+
+Instead of:
+GetData(string id)
+
+Use string id only when content is backend-driven or designer-defined.
+
+4. Service should be the main entry point.
+
+Other systems should talk to IXService, not directly to XSettings or XVault.
+
+5. Installer should be the only place for dependency bindings.
+
+6. Keep each system independent.
+
+A system should be easy to move, test, or refactor.
+
+---
+
+## AI Instruction
+
+When generating code for this project, follow this structure:
+
+- Create a folder named XSystem.
+- Use IXService as the public interface.
+- Put all runtime behavior inside XService.
+- Use XInstaller for Zenject bindings.
+- Use XSettings as the ScriptableObject registry for XData assets.
+- Use XVault for mutable runtime/session/save data.
+- Use XType for enums and type definitions.
+- Use XConfig for plain runtime config objects.
+- Use XData as the base ScriptableObject authoring asset.
+- Keep code clean, readable, SOLID, and separated by responsibility.
+- Avoid unnecessary comments.
+- Avoid monolithic managers.
+- Avoid mixing runtime state with ScriptableObject data.

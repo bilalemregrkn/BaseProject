@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Plugins.AudioService
 {
-    public abstract class BaseAudio : ScriptableObject
+    public abstract class AudioData : ScriptableObject
     {
         [SerializeField] private string _id;
         [SerializeField] private AudioClip _clip;
@@ -13,5 +13,7 @@ namespace Plugins.AudioService
         public AudioClip Clip   => _clip;
         public float     Volume => _volume;
         public float     Pitch  => _pitch;
+
+        public AudioConfig ToConfig() => new AudioConfig { Clip = _clip, Volume = _volume, Pitch = _pitch };
     }
 }

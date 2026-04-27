@@ -44,16 +44,18 @@ namespace Plugins.AudioService
 
         public void Play(string id, float volume = 1f, float pitch = 1f)
         {
-            var audio = _settings.GetAudio(id);
-            if (audio == null) return;
-            Play(audio.Clip, audio.Volume * volume, audio.Pitch * pitch);
+            var data = _settings.GetData(id);
+            if (data == null) return;
+            var config = data.ToConfig();
+            Play(config.Clip, config.Volume * volume, config.Pitch * pitch);
         }
 
         public void PlayAt(string id, Vector3 position, float volume = 1f)
         {
-            var audio = _settings.GetAudio(id);
-            if (audio == null) return;
-            PlayAt(audio.Clip, position, audio.Volume * volume);
+            var data = _settings.GetData(id);
+            if (data == null) return;
+            var config = data.ToConfig();
+            PlayAt(config.Clip, position, config.Volume * volume);
         }
 
         public void Play(AudioClip clip, float volume = 1f, float pitch = 1f)

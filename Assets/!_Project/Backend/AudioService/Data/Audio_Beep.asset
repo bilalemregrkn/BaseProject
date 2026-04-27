@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afe870f4a5eed4bc1b7c7af09932e282, type: 3}
-  m_Name: Audio 2
-  m_EditorClassIdentifier: Game.Plugins.AudioService::Plugins.AudioService.SimpleAudio
-  _id: warning
-  _clip: {fileID: 8300000, guid: c296b1aa5cde14ade8ee96ba224daaa5, type: 3}
+  m_Script: {fileID: 11500000, guid: a8a027b86604484d816a69d465268eb5, type: 3}
+  m_Name: Audio_Beep
+  m_EditorClassIdentifier:
+  _id: beep
+  _clip: {fileID: 8300000, guid: 903385f010e824355a5b406762ea870b, type: 3}
   _volume: 1
   _pitch: 1

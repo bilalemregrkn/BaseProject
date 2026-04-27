@@ -28,7 +28,8 @@
       "Bash(git push *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(grep -v \"m_Name: $\")"
+      "Bash(grep -v \"m_Name: $\")",
+      "Bash(uuidgen)"
     ]
   }
 }

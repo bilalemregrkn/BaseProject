@@ -10,13 +10,13 @@ namespace Plugins.AudioService
     {
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] [Range(0f, 1f)] private float _defaultVolume = 1f;
-        [SerializeField] [InlineEditor] private List<BaseAudio> _clips = new();
+        [SerializeField] [InlineEditor] private List<AudioData> _clips = new();
 
         public AudioMixer Mixer => _mixer;
         public float DefaultVolume => _defaultVolume;
-        public IReadOnlyList<BaseAudio> Clips => _clips;
+        public IReadOnlyList<AudioData> Clips => _clips;
 
-        public BaseAudio GetAudio(string id)
+        public AudioData GetData(string id)
         {
             foreach (var clip in _clips)
                 if (clip.Id == id) return clip;
@@ -29,11 +29,11 @@ namespace Plugins.AudioService
         {
             _clips.Clear();
 
-            var guids = UnityEditor.AssetDatabase.FindAssets("t:BaseAudio");
+            var guids = UnityEditor.AssetDatabase.FindAssets("t:AudioData");
             foreach (var guid in guids)
             {
                 var path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<BaseAudio>(path);
+                var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioData>(path);
                 if (asset != null)
                     _clips.Add(asset);
             }
@@ -43,7 +43,7 @@ namespace Plugins.AudioService
 
             RegenerateAudioTypeFile();
 
-            Debug.Log($"[AudioSettings] Refreshed {_clips.Count} BaseAudio asset(s).");
+            Debug.Log($"[AudioSettings] Refreshed {_clips.Count} AudioData asset(s).");
         }
 
         private void RegenerateAudioTypeFile()
@@ -63,7 +63,7 @@ namespace Plugins.AudioService
             sb.AppendLine("    }");
             sb.Append("}");
 
-            const string assetPath = "Assets/!_Project/Backend/AudioService/AudioType.cs";
+            const string assetPath = "Assets/!_Project/Backend/AudioService/Scripts/AudioType.cs";
             System.IO.File.WriteAllText(
                 System.IO.Path.Combine(UnityEngine.Application.dataPath, "../" + assetPath),
                 sb.ToString()

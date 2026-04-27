@@ -4,6 +4,7 @@ namespace Plugins.AudioService
     public static class AudioType
     {
         public const string Beep = "beep";
+        public const string Button_press = "button_press";
         public const string Warning = "warning";
     }
 }
