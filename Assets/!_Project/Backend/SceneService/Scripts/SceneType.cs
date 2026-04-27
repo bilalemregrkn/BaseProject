@@ -3,5 +3,7 @@ namespace Plugins.SceneService
 {
     public static class SceneType
     {
+        public const string Game = "Game";
+        public const string Meta = "Meta";
     }
 }
