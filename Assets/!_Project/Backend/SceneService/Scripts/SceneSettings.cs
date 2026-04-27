@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Plexitugins.SceneService;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,11 +7,11 @@ namespace Plugins.SceneService
     [CreateAssetMenu(menuName = "Game/Scene Settings", fileName = "SceneSettings")]
     public class SceneSettings : ScriptableObject
     {
-        [SerializeField] [InlineEditor] private List<BaseScene> _scenes = new();
+        [SerializeField] [InlineEditor] private List<SceneData> _scenes = new();
 
-        public IReadOnlyList<BaseScene> Scenes => _scenes;
+        public IReadOnlyList<SceneData> Scenes => _scenes;
 
-        public BaseScene GetScene(string id)
+        public SceneData GetData(string id)
         {
             foreach (var scene in _scenes)
                 if (scene.Id == id) return scene;
@@ -25,11 +24,11 @@ namespace Plugins.SceneService
         {
             _scenes.Clear();
 
-            var guids = UnityEditor.AssetDatabase.FindAssets("t:BaseScene");
+            var guids = UnityEditor.AssetDatabase.FindAssets("t:SceneData");
             foreach (var guid in guids)
             {
-                var path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<BaseScene>(path);
+                var path  = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+                var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<SceneData>(path);
                 if (asset != null)
                     _scenes.Add(asset);
             }
@@ -39,7 +38,7 @@ namespace Plugins.SceneService
 
             RegenerateSceneTypeFile();
 
-            Debug.Log($"[SceneSettings] Refreshed {_scenes.Count} BaseScene asset(s).");
+            Debug.Log($"[SceneSettings] Refreshed {_scenes.Count} SceneData asset(s).");
         }
 
         private void RegenerateSceneTypeFile()

@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using Plexitugins.SceneService;
 
 namespace Plugins.SceneService
 {
@@ -9,9 +8,9 @@ namespace Plugins.SceneService
         string ActiveScene { get; }
 
         UniTask LoadAsync(string id, LoadMode mode = LoadMode.Single);
-        UniTask LoadAsync(BaseScene scene, LoadMode mode = LoadMode.Single);
+        UniTask LoadAsync(SceneData data, LoadMode mode = LoadMode.Single);
         UniTask UnloadAsync(string id);
-        UniTask UnloadAsync(BaseScene scene);
+        UniTask UnloadAsync(SceneData data);
         bool IsLoaded(string id);
     }
 

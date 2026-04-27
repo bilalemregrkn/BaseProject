@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Plugins.EventBus;
-using Plexitugins.SceneService;
 using UnityEngine;
 
 namespace Plugins.SceneService
@@ -26,38 +25,38 @@ namespace Plugins.SceneService
                 _loadedScenes.Add(UnityEngine.SceneManagement.SceneManager.GetSceneAt(i).name);
         }
 
-        public UniTask LoadAsync(BaseScene scene, LoadMode mode = LoadMode.Single)
-            => LoadAsyncInternal(scene.SceneName, mode);
+        public UniTask LoadAsync(SceneData data, LoadMode mode = LoadMode.Single)
+            => LoadAsyncInternal(data.ToConfig().SceneName, mode);
 
         public UniTask LoadAsync(string id, LoadMode mode = LoadMode.Single)
         {
-            var scene = _settings.GetScene(id);
-            if (scene == null)
+            var data = _settings.GetData(id);
+            if (data == null)
             {
-                Debug.LogError($"[SceneService] No BaseScene found for id '{id}'");
+                Debug.LogError($"[SceneService] No SceneData found for id '{id}'");
                 return UniTask.CompletedTask;
             }
-            return LoadAsyncInternal(scene.SceneName, mode);
+            return LoadAsyncInternal(data.ToConfig().SceneName, mode);
         }
 
-        public UniTask UnloadAsync(BaseScene scene)
-            => UnloadAsyncInternal(scene.SceneName);
+        public UniTask UnloadAsync(SceneData data)
+            => UnloadAsyncInternal(data.ToConfig().SceneName);
 
         public UniTask UnloadAsync(string id)
         {
-            var scene = _settings.GetScene(id);
-            if (scene == null)
+            var data = _settings.GetData(id);
+            if (data == null)
             {
-                Debug.LogError($"[SceneService] No BaseScene found for id '{id}'");
+                Debug.LogError($"[SceneService] No SceneData found for id '{id}'");
                 return UniTask.CompletedTask;
             }
-            return UnloadAsyncInternal(scene.SceneName);
+            return UnloadAsyncInternal(data.ToConfig().SceneName);
         }
 
         public bool IsLoaded(string id)
         {
-            var scene = _settings.GetScene(id);
-            return scene != null && _loadedScenes.Contains(scene.SceneName);
+            var data = _settings.GetData(id);
+            return data != null && _loadedScenes.Contains(data.ToConfig().SceneName);
         }
 
         private async UniTask LoadAsyncInternal(string sceneName, LoadMode mode)

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Plexitugins.SceneService
+namespace Plugins.SceneService
 {
-    public abstract class BaseScene : ScriptableObject
+    public abstract class SceneData : ScriptableObject
     {
         [SerializeField] private string _id;
         [SerializeField] private string _sceneName;
@@ -19,5 +19,7 @@ namespace Plexitugins.SceneService
 
         public string Id        => _id;
         public string SceneName => _sceneName;
+
+        public SceneConfig ToConfig() => new SceneConfig { SceneName = _sceneName };
     }
 }

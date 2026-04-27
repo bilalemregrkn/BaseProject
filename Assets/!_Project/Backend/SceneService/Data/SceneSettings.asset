@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f38ffedd4c4f109c4dc98bf624d55, type: 3}
   m_Name: SceneSettings
   m_EditorClassIdentifier: Game.Plugins.SceneService::Plugins.SceneService.SceneSettings
-  _scenes:
-  - {fileID: 11400000, guid: 2e5b172f98b0a43b5841a7d5cf09ec7c, type: 2}
-  - {fileID: 11400000, guid: 46a627a7f862143f68e4442f54203ee8, type: 2}
+  _scenes: []
