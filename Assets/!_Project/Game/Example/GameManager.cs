@@ -18,10 +18,10 @@ namespace Game.Example
     {
         [Inject] private IPanelService _panelService;
         [Inject] private ICurrencyService _currencyService;
-
+        
         private void Start()
         {
-            _panelService.ShowAsync(PanelIds.Game).Forget();
+            _panelService.ShowAsync(PanelType.Panel_GamePlay).Forget();
         }
     }
 }

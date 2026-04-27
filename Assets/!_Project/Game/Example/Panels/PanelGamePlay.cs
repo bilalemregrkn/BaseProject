@@ -29,13 +29,13 @@ namespace Game.Example
         private void Start()
         {
             _highScore = _saveService.Load(HighScoreKey, 0);
-            _panelService.Register(PanelIds.Game, this);
+            _panelService.Register(PanelType.Panel_GamePlay, this);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            _panelService?.Unregister(PanelIds.Game);
+            _panelService?.Unregister(PanelType.Panel_GamePlay);
         }
 
         private void OnEnable()
