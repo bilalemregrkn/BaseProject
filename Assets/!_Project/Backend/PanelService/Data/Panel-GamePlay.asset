@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c525bcbff2084c2dbfb8296948c6c8cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d61b677c87b467fb31995106005a5ab, type: 3}
   m_Name: Panel-GamePlay
   m_EditorClassIdentifier:
   _id: Panel-GamePlay
-  _prefab: {fileID: 0, guid: 30f1a146ae5dc4b89bc0466d7447a458, type: 3}
+  _prefab: {fileID: 8351491864765470669, guid: 30f1a146ae5dc4b89bc0466d7447a458, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PanelSettings
   m_EditorClassIdentifier: Game.Plugins.PanelService::Plugins.PanelService.PanelSettings
   _panels:
-  - {fileID: -8793620106571845672, guid: e53b817991c2d4e139835f7324580fe3, type: 3}
-  - {fileID: 7575164143052398389, guid: 75e0b2c5f755148099297c86b46b4b58, type: 3}
-  - {fileID: 7870804881452058723, guid: 802d118d3be394a8f911af77c2a98939, type: 3}
-  - {fileID: 8351491864765470669, guid: 30f1a146ae5dc4b89bc0466d7447a458, type: 3}
+  - {fileID: 11400000, guid: 744457c65170402aa3269146c3ea3bae, type: 2}
+  - {fileID: 11400000, guid: cf75032c60e94127b71cfa2becdb3de2, type: 2}
+  - {fileID: 11400000, guid: d9f5479754ec4fda90787a2b48bae0dc, type: 2}
+  - {fileID: 11400000, guid: 03112aef8dee43b6bfbcddb646fd9f39, type: 2}

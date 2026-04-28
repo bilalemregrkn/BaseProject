@@ -4,8 +4,8 @@ namespace Plugins.PanelService
     public static class PanelType
     {
         public const string Panel_Complete = "Panel-Complete";
+        public const string Panel_GamePlay = "Panel-GamePlay";
         public const string Panel_Home = "Panel-Home";
         public const string Panel_Setting = "Panel-Setting";
-        public const string Panel_GamePlay = "Panel-GamePlay";
     }
 }

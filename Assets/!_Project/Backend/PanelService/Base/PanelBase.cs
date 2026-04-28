@@ -9,22 +9,14 @@ namespace Plugins.PanelService
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class PanelBase : SmartComponent, IPanel
     {
-        [SerializeField] private bool customId;
-
-        [ShowIf(nameof(customId))] [SerializeField]
-        private string _id;
-
-        [SerializeField] private float _fadeDuration = 0.25f;
-
-        private CanvasGroup _canvasGroup;
+        private CanvasGroup CanvasGroup => Get<CanvasGroup>(Source.Self);
         private bool _isVisible;
+        private float _fadeDuration = 0.125f;
 
-        public string Id => customId ? _id : transform.name;
         public bool IsVisible => _isVisible;
 
         protected virtual void Awake()
         {
-            _canvasGroup = Get<CanvasGroup>(Source.Self);
             SetVisible(false, instant: true);
         }
 
@@ -33,12 +25,12 @@ namespace Plugins.PanelService
             if (_isVisible) return;
             _isVisible = true;
 
-            _canvasGroup.interactable = false;
-            _canvasGroup.blocksRaycasts = true;
+            CanvasGroup.interactable = false;
+            CanvasGroup.blocksRaycasts = true;
 
-            await Tween.Alpha(_canvasGroup, 1f, _fadeDuration);
+            await Tween.Alpha(CanvasGroup, 1f, _fadeDuration);
 
-            _canvasGroup.interactable = true;
+            CanvasGroup.interactable = true;
             OnShown();
         }
 
@@ -47,20 +39,20 @@ namespace Plugins.PanelService
             if (!_isVisible) return;
             _isVisible = false;
 
-            _canvasGroup.interactable = false;
+            CanvasGroup.interactable = false;
 
-            await Tween.Alpha(_canvasGroup, 0f, _fadeDuration);
+            await Tween.Alpha(CanvasGroup, 0f, _fadeDuration);
 
-            _canvasGroup.blocksRaycasts = false;
+            CanvasGroup.blocksRaycasts = false;
             OnHidden();
         }
 
         private void SetVisible(bool visible, bool instant)
         {
             _isVisible = visible;
-            _canvasGroup.alpha = visible ? 1f : 0f;
-            _canvasGroup.interactable = visible;
-            _canvasGroup.blocksRaycasts = visible;
+            CanvasGroup.alpha = visible ? 1f : 0f;
+            CanvasGroup.interactable = visible;
+            CanvasGroup.blocksRaycasts = visible;
         }
 
         protected virtual void OnShown()

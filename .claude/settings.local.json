@@ -30,7 +30,10 @@
       "Bash(git commit *)",
       "Bash(grep -v \"m_Name: $\")",
       "Bash(uuidgen)",
-      "Bash(xargs -I{} sh -c 'echo \"=== {} ===\" && cat \"{}\"')"
+      "Bash(xargs -I{} sh -c 'echo \"=== {} ===\" && cat \"{}\"')",
+      "Bash(xxd \"/Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/PanelService/Data/Panel-Home.asset.meta\")",
+      "Bash(xxd \"/Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/PanelService/Data/Panel-Complete.asset.meta\")",
+      "Bash(xxd *)"
     ]
   }
 }
