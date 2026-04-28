@@ -1,6 +1,6 @@
 namespace Plugins.PanelService
 {
-    public class PanelSetting : BasePanel
+    public class PanelGameSetting : PanelBase
     {
         
     }

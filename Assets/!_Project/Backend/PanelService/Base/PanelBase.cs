@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Plugins.PanelService
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class BasePanel : SmartComponent, IPanel
+    public abstract class PanelBase : SmartComponent, IPanel
     {
         [SerializeField] private bool customId;
 

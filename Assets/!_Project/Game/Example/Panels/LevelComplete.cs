@@ -1,6 +1,6 @@
 namespace Plugins.PanelService
 {
-    public class PanelLevelComplete : BasePanel
+    public class LevelComplete : PanelBase
     {
         
     }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Game.Example
 {
-    public class PanelGamePlay : BasePanel
+    public class GamePlay : PanelBase
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private TextMeshProUGUI _highScoreText;

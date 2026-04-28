@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Plugins.PanelService
 {
-    public class PanelHome : BasePanel
+    public class Home : PanelBase
     {
         [SerializeField] private BaseButton startButton;
     }

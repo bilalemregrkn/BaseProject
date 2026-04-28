@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,11 +8,11 @@ namespace Plugins.PanelService
     [CreateAssetMenu(menuName = "Game/Panel Settings", fileName = "PanelSettings")]
     public class PanelServiceSettings : ScriptableObject
     {
-        [SerializeField] [InlineEditor] private List<BasePanel> _panels = new();
+        [SerializeField] [InlineEditor] private List<PanelBase> _panels = new();
 
-        public IReadOnlyList<BasePanel> Panels => _panels;
+        public IReadOnlyList<PanelBase> Panels => _panels;
 
-        public BasePanel GetPrefab(string id)
+        public PanelBase GetPrefab(string id)
         {
             foreach (var panel in _panels)
                 if (panel.Id == id) return panel;
@@ -30,7 +31,7 @@ namespace Plugins.PanelService
                 var path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
                 var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 if (prefab == null) continue;
-                var panel = prefab.GetComponent<BasePanel>();
+                var panel = prefab.GetComponent<PanelBase>();
                 if (panel != null)
                     _panels.Add(panel);
             }
