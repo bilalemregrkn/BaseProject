@@ -33,7 +33,12 @@
       "Bash(xargs -I{} sh -c 'echo \"=== {} ===\" && cat \"{}\"')",
       "Bash(xxd \"/Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/PanelService/Data/Panel-Home.asset.meta\")",
       "Bash(xxd \"/Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/PanelService/Data/Panel-Complete.asset.meta\")",
-      "Bash(xxd *)"
+      "Bash(xxd *)",
+      "Bash(sed -i '' 's|menuName = \"Game/Audio Settings\"|menuName = \"Systems/Audio/Settings\"|' /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/AudioSystem/Scripts/AudioSettings.cs)",
+      "Bash(sed -i '' 's|menuName = \"Game/Audio/Audio Default\"|menuName = \"Systems/Audio/Default\"|' /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/AudioSystem/Scripts/AudioDefault.cs)",
+      "Bash(sed -i '' 's|menuName = \"Game/Haptic Settings\"|menuName = \"Systems/Haptic/Settings\"|' /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/HapticSystem/HapticSettings.cs)",
+      "Bash(sed -i '' 's|menuName = \"Game/Currency Settings\"|menuName = \"Systems/Currency/Settings\"|' /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/CurrencySystem/Service/CurrencySettings.cs)",
+      "Bash(sed -i '' 's|menuName = \"Create CurrencyDefault\"|menuName = \"Systems/Currency/Default\"|' /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/CurrencySystem/Base/CurrencyDefault.cs)"
     ]
   }
 }

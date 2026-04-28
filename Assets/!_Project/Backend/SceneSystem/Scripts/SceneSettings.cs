@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Backend.Systems.Scene
 {
-    [CreateAssetMenu(menuName = "Game/Scene Settings", fileName = "SceneSettings")]
+    [CreateAssetMenu(menuName = "Systems/Scene/Settings", fileName = "SceneSettings")]
     public class SceneSettings : ScriptableObject
     {
         [SerializeField] [InlineEditor] private List<SceneData> _scenes = new();

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Backend.Systems.Panel
 {
-    [CreateAssetMenu(menuName = "Game/Panel Data", fileName = "PanelData", order = 0)]
+    [CreateAssetMenu(menuName = "Systems/Panel/Data", fileName = "PanelData", order = 0)]
     public class PanelData : ScriptableObject
     {
         [SerializeField] private string _id;

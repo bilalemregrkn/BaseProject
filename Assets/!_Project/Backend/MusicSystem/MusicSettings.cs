@@ -3,7 +3,7 @@ using UnityEngine.Audio;
 
 namespace Backend.Systems.Music
 {
-    [CreateAssetMenu(menuName = "Game/Music Settings", fileName = "MusicSettings")]
+    [CreateAssetMenu(menuName = "Systems/Music/Settings", fileName = "MusicSettings")]
     public class MusicSettings : ScriptableObject
     {
         [SerializeField] private AudioMixerGroup _mixerGroup;

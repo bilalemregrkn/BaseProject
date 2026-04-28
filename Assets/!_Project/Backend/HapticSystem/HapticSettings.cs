@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Backend.Systems.Haptic
 {
-    [CreateAssetMenu(menuName = "Game/Haptic Settings", fileName = "HapticSettings")]
+    [CreateAssetMenu(menuName = "Systems/Haptic/Settings", fileName = "HapticSettings")]
     public class HapticSettings : ScriptableObject
     {
         [SerializeField] private bool _defaultEnabled = true;

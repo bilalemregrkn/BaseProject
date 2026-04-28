@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Backend.Systems.Reward
 {
-    [CreateAssetMenu(menuName = "Game/Reward Settings", fileName = "RewardSettings")]
+    [CreateAssetMenu(menuName = "Systems/Reward/Settings", fileName = "RewardSettings")]
     public class RewardSettings : ScriptableObject
     {
         [SerializeField] [InlineEditor] private List<RewardData> _rewards = new();

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Backend.Systems.Currency
 {
-    [CreateAssetMenu(menuName = "Game/Currency Settings", fileName = "CurrencySettings")]
+    [CreateAssetMenu(menuName = "Systems/Currency/Settings", fileName = "CurrencySettings")]
     public class CurrencySettings : ScriptableObject
     {
         [SerializeField] [InlineEditor] private List<CurrencyData> _currencies = new();

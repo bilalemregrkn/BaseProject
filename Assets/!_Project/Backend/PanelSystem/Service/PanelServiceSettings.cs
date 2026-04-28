@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Backend.Systems.Panel
 {
-    [CreateAssetMenu(menuName = "Game/Panel Settings", fileName = "PanelSettings")]
+    [CreateAssetMenu(menuName = "Systems/Panel/Settings", fileName = "PanelSettings")]
     public class PanelServiceSettings : ScriptableObject
     {
         [SerializeField] [InlineEditor] private List<PanelData> _panels = new();
