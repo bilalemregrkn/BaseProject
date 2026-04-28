@@ -24,12 +24,6 @@ namespace Game.Example
         private float _timer;
         private bool _active;
 
-        private void Start()
-        {
-            _updateService.Add(this);
-            _active = true;
-        }
-
         private void OnDestroy()
         {
             _updateService?.Remove(this);
@@ -70,6 +64,17 @@ namespace Game.Example
             _timer = _spawnInterval;
         }
 
-        public void SetActive(bool active) => _active = active;
+        public void Play()
+        {
+            _timer = 0f;
+            _active = true;
+            _updateService.Add(this);
+        }
+
+        public void Stop()
+        {
+            _active = false;
+            _updateService.Remove(this);
+        }
     }
 }

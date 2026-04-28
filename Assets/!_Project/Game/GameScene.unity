@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 354894400}
   - component: {fileID: 354894399}
   - component: {fileID: 354894398}
-  - component: {fileID: 354894395}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -139,21 +138,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &354894395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354894394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7c92e7921dc540f1b3a248ec5b4296d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Example::Game.Example.CircleSpawner
-  _circlePrefab: {fileID: -774355746540100329, guid: 0eebbde6946c745f882d1b2ced299e88, type: 3}
-  _spawnArea: {fileID: 354894401}
-  _spawnInterval: 1.5
 --- !u!114 &354894398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +221,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &370175966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370175970}
+  - component: {fileID: 370175969}
+  - component: {fileID: 370175968}
+  - component: {fileID: 370175967}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &370175967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370175966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c92e7921dc540f1b3a248ec5b4296d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Example::Game.Example.CircleSpawner
+  _circlePrefab: {fileID: -774355746540100329, guid: 0eebbde6946c745f882d1b2ced299e88, type: 3}
+  _spawnArea: {fileID: 354894401}
+  _spawnInterval: 1.5
+--- !u!114 &370175968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370175966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4da97e787c8447409e8e46e641bb40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Example::Game.Example.GameEntryPoint
+  circleSpawner: {fileID: 370175967}
+--- !u!114 &370175969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370175966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133920715c8540c3801014a75b6e2456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Plugins.PanelService::Plugins.PanelService.TestPanelService
+  id: 
+--- !u!4 &370175970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370175966}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3382.7253, y: 0, z: 3619.562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &456938330
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,8 +513,6 @@ GameObject:
   - component: {fileID: 1191376439}
   - component: {fileID: 1191376437}
   - component: {fileID: 1191376438}
-  - component: {fileID: 1191376440}
-  - component: {fileID: 1191376441}
   m_Layer: 0
   m_Name: Installer
   m_TagString: Untagged
@@ -502,31 +559,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1191376440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191376436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4da97e787c8447409e8e46e641bb40f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Example::Game.Example.GameEntryPoint
---- !u!114 &1191376441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191376436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 133920715c8540c3801014a75b6e2456, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Plugins.PanelService::Plugins.PanelService.TestPanelService
-  id: 
 --- !u!1 &1417367524
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,3 +780,4 @@ SceneRoots:
   - {fileID: 354894401}
   - {fileID: 514536243}
   - {fileID: 1191376439}
+  - {fileID: 370175970}
