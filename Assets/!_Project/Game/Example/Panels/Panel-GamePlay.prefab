@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1111021244491140901}
   - component: {fileID: 1512047259804443218}
   - component: {fileID: 7682325545042380720}
+  - component: {fileID: 7101617285938054810}
   m_Layer: 5
-  m_Name: Best
+  m_Name: Text Best
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,6 +138,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7101617285938054810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756229227297483431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c414b5f91be64d2b87b808e924756177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Backend.Systems.Component::Backend.Systems.Component.BaseText
 --- !u!1 &2828679876598691129
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,9 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b16c1a767d547b3b6e177539468eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Example::Game.Example.PanelGamePlay
-  customId: 0
-  _id: gameplay
-  _fadeDuration: 0.25
   _scoreText: {fileID: 6905898196721719495}
   _highScoreText: {fileID: 7682325545042380720}
 --- !u!1 &7410403598347116974
@@ -284,7 +294,7 @@ GameObject:
   - component: {fileID: 2980950590455443088}
   - component: {fileID: 2693288991205549687}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 1, b: 0.9240184, a: 1}
+  m_Color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -358,8 +368,9 @@ GameObject:
   - component: {fileID: 459867780999635621}
   - component: {fileID: 1712836800953013186}
   - component: {fileID: 6905898196721719495}
+  - component: {fileID: 2550606775077287543}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -484,3 +495,15 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2550606775077287543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120759314451097138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c414b5f91be64d2b87b808e924756177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Backend.Systems.Component::Backend.Systems.Component.BaseText

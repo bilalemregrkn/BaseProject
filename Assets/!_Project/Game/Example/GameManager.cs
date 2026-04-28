@@ -18,10 +18,13 @@ namespace Game.Example
     {
         [Inject] private IPanelService _panelService;
         [Inject] private ICurrencyService _currencyService;
+        //todo add sinnal bus listen start 
+        
+        
         
         private void Start()
         {
-            _panelService.ShowAsync(PanelType.Panel_GamePlay).Forget();
+            _panelService.ShowAsync(PanelType.Panel_Home).Forget();
         }
     }
 }
