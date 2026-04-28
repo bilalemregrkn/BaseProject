@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Plugins.CurrencyService
 {
-    public abstract class BaseCurrency : ScriptableObject
+    public abstract class CurrencyData : ScriptableObject
     {
         [SerializeField] private string _id;
         [SerializeField] private string _displayName;

@@ -7,11 +7,11 @@ namespace Plugins.CurrencyService
     [CreateAssetMenu(menuName = "Game/Currency Settings", fileName = "CurrencySettings")]
     public class CurrencySettings : ScriptableObject
     {
-        [SerializeField] [InlineEditor] private List<BaseCurrency> currencies = new();
+        [SerializeField] [InlineEditor] private List<CurrencyData> currencies = new();
 
-        public IReadOnlyList<BaseCurrency> Currencies => currencies;
+        public IReadOnlyList<CurrencyData> Currencies => currencies;
 
-        public BaseCurrency GetCurrency(string type)
+        public CurrencyData GetCurrency(string type)
         {
             foreach (var def in currencies)
                 if (def.Id == type)
@@ -30,7 +30,7 @@ namespace Plugins.CurrencyService
             foreach (var guid in guids)
             {
                 var path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<BaseCurrency>(path);
+                var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<CurrencyData>(path);
                 if (asset != null)
                     currencies.Add(asset);
             }

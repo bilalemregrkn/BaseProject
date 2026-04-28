@@ -2,12 +2,13 @@ using Plugins.EventBus;
 using Reflex.Attributes;
 using Tools.SmartComponent;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Plugins.CurrencyService
 {
     public class TextCurrency : BaseText
     {
-        [SerializeField] private BaseCurrency _currency;
+        [FormerlySerializedAs("_currency")] [SerializeField] private CurrencyData currencyData;
         [SerializeField] private string _format = "{0}";
 
         [Inject] private IEventBus _eventBus;
@@ -16,7 +17,7 @@ namespace Plugins.CurrencyService
         private void Start()
         {
             _eventBus.Subscribe<CurrencyChanged>(OnCurrencyChanged);
-            Refresh(_currencyService.Get(_currency.Id));
+            Refresh(_currencyService.Get(currencyData.Id));
         }
 
         protected override void OnDestroy()
@@ -27,7 +28,7 @@ namespace Plugins.CurrencyService
 
         private void OnCurrencyChanged(CurrencyChanged e)
         {
-            if (e.Type != _currency.Id) return;
+            if (e.Type != currencyData.Id) return;
             Refresh(e.NewAmount);
         }
 
