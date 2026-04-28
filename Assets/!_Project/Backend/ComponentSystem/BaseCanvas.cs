@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Tools.SmartComponent
+namespace Backend.Systems.Component
 {
     public class BaseCanvas : SmartComponent
     {

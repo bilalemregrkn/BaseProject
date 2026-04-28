@@ -1,10 +1,10 @@
 using Cysharp.Threading.Tasks;
 using PrimeTween;
 using Sirenix.OdinInspector;
-using Tools.SmartComponent;
+using Backend.Systems.Component;
 using UnityEngine;
 
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class PanelBase : SmartComponent, IPanel

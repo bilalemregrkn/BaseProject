@@ -1,4 +1,4 @@
-namespace Plugins.SaveService
+namespace Backend.Systems.Save
 {
     public interface ISaveService
     {

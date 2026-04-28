@@ -1,6 +1,6 @@
-using Plugins.SaveService;
+using Backend.Systems.Save;
 
-namespace Plugins.HapticService
+namespace Backend.Systems.Haptic
 {
     public sealed class HapticVault
     {

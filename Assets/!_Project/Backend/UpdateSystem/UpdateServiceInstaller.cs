@@ -1,7 +1,7 @@
 using Reflex.Core;
 using UnityEngine;
 
-namespace Plugins.UpdateService
+namespace Backend.Systems.Update
 {
     public class UpdateServiceInstaller : MonoBehaviour, IInstaller
     {

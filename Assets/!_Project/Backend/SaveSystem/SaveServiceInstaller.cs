@@ -1,7 +1,7 @@
 using Reflex.Core;
 using UnityEngine;
 
-namespace Plugins.SaveService
+namespace Backend.Systems.Save
 {
     public class SaveServiceInstaller : MonoBehaviour, IInstaller
     {

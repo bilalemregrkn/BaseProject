@@ -2,7 +2,7 @@ using Reflex.Core;
 using Reflex.Enums;
 using UnityEngine;
 
-namespace Plugins.HapticService
+namespace Backend.Systems.Haptic
 {
     public class HapticServiceInstaller : MonoBehaviour, IInstaller
     {

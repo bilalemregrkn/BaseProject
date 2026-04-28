@@ -1,14 +1,13 @@
-using Plugins.EventBus;
+using Backend.Systems.EventBus;
 using Reflex.Attributes;
-using Tools.SmartComponent;
+using Backend.Systems.Component;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Plugins.CurrencyService
+namespace Backend.Systems.Currency
 {
     public class TextCurrency : BaseText
     {
-        [FormerlySerializedAs("_currency")] [SerializeField] private CurrencyData currencyData;
+        [SerializeField] private CurrencyData currencyData;
         [SerializeField] private string _format = "{0}";
 
         [Inject] private IEventBus _eventBus;

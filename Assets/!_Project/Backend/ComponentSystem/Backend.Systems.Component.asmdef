@@ -1,6 +1,6 @@
 {
     "name": "Backend.Systems.Component",
-    "rootNamespace": "Tools.SmartComponent",
+    "rootNamespace": "Backend.Systems.Component",
     "references": [
         "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],

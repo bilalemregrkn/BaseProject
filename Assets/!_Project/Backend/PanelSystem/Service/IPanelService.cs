@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     public interface IPanelService
     {

@@ -1,6 +1,6 @@
 {
     "name": "Backend.Systems.Currency",
-    "rootNamespace": "Plugins.CurrencyService",
+    "rootNamespace": "Backend.Systems.Currency",
     "references": [
         "GUID:ad257b701659a484bac097439b941a7a",
         "GUID:5d728edac334745ec908e43f88fc8077",

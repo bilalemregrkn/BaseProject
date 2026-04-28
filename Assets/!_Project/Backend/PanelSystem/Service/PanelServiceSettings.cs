@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     [CreateAssetMenu(menuName = "Game/Panel Settings", fileName = "PanelSettings")]
     public class PanelServiceSettings : ScriptableObject

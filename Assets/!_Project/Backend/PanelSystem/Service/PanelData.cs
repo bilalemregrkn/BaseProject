@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     [CreateAssetMenu(menuName = "Game/Panel Data", fileName = "PanelData", order = 0)]
     public class PanelData : ScriptableObject

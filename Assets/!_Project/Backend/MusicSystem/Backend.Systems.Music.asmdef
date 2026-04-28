@@ -1,6 +1,6 @@
 {
     "name": "Backend.Systems.Music",
-    "rootNamespace": "Plugins.MusicService",
+    "rootNamespace": "Backend.Systems.Music",
     "references": [
         "GUID:5d728edac334745ec908e43f88fc8077",
         "GUID:80ecb87cae9c44d19824e70ea7229748",

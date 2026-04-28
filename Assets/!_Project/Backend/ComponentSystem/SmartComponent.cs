@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tools.SmartComponent
+namespace Backend.Systems.Component
 {
     public enum Source
     {

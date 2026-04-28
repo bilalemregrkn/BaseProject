@@ -1,9 +1,9 @@
 using Cysharp.Threading.Tasks;
 using Reflex.Attributes;
-using Tools.SmartComponent;
+using Backend.Systems.Component;
 using UnityEngine;
 
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     public class Home : PanelBase
     {

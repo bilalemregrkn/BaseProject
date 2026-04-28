@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.CurrencyService
+namespace Backend.Systems.Currency
 {
     public abstract class CurrencyData : ScriptableObject
     {

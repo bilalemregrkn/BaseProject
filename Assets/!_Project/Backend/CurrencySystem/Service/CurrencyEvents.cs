@@ -1,6 +1,6 @@
-using Plugins.EventBus;
+using Backend.Systems.EventBus;
 
-namespace Plugins.CurrencyService
+namespace Backend.Systems.Currency
 {
     public struct CurrencyChanged : IEvent
     {

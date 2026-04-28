@@ -2,7 +2,7 @@ using Reflex.Core;
 using Reflex.Enums;
 using UnityEngine;
 
-namespace Plugins.MusicService
+namespace Backend.Systems.Music
 {
     public class MusicServiceInstaller : MonoBehaviour, IInstaller
     {

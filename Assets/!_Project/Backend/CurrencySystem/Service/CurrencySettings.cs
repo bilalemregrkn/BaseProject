@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 
-namespace Plugins.CurrencyService
+namespace Backend.Systems.Currency
 {
     [CreateAssetMenu(menuName = "Game/Currency Settings", fileName = "CurrencySettings")]
     public class CurrencySettings : ScriptableObject

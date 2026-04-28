@@ -1,7 +1,7 @@
 using Reflex.Core;
 using UnityEngine;
 
-namespace Plugins.EventBus
+namespace Backend.Systems.EventBus
 {
     public class EventBusInstaller : MonoBehaviour, IInstaller
     {

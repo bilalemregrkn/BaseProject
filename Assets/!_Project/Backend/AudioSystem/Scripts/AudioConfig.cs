@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.AudioService
+namespace Backend.Systems.Audio
 {
     public struct AudioConfig
     {

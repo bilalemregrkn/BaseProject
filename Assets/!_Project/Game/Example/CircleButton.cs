@@ -1,7 +1,7 @@
 using System;
-using Plugins.CurrencyService;
+using Backend.Systems.Currency;
 using PrimeTween;
-using Tools.SmartComponent;
+using Backend.Systems.Component;
 using UnityEngine;
 using UnityEngine.UI;
 

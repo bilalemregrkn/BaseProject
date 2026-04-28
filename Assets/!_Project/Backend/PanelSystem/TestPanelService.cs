@@ -4,7 +4,7 @@ using Reflex.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     public class TestPanelService : MonoBehaviour
     {

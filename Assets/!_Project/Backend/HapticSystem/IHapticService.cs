@@ -1,4 +1,4 @@
-namespace Plugins.HapticService
+namespace Backend.Systems.Haptic
 {
     public interface IHapticService
     {

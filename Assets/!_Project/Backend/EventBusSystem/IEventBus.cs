@@ -1,6 +1,6 @@
 using System;
 
-namespace Plugins.EventBus
+namespace Backend.Systems.EventBus
 {
     public interface IEventBus
     {

@@ -1,6 +1,6 @@
-using Plugins.EventBus;
+using Backend.Systems.EventBus;
 
-namespace Plugins.AudioService
+namespace Backend.Systems.Audio
 {
     public struct VolumeChanged : IEvent
     {

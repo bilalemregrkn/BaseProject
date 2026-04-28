@@ -1,4 +1,4 @@
-using Plugins.EventBus;
+using Backend.Systems.EventBus;
 
 namespace Game.Example
 {

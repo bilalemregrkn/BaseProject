@@ -1,7 +1,7 @@
-using Plugins.CurrencyService;
-using Plugins.EventBus;
-using Plugins.PanelService;
-using Plugins.SaveService;
+using Backend.Systems.Currency;
+using Backend.Systems.EventBus;
+using Backend.Systems.Panel;
+using Backend.Systems.Save;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;

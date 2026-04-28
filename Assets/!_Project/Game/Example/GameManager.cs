@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Plugins.CurrencyService;
-using Plugins.PanelService;
+using Backend.Systems.Currency;
+using Backend.Systems.Panel;
 using Reflex.Attributes;
 using UnityEngine;
 

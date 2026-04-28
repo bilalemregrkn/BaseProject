@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Plugins.SceneService
+namespace Backend.Systems.Scene
 {
     [CreateAssetMenu(menuName = "Game/Scene Settings", fileName = "SceneSettings")]
     public class SceneSettings : ScriptableObject

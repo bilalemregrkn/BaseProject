@@ -1,6 +1,6 @@
-using Plugins.SceneService;
+using Backend.Systems.Scene;
 using Reflex.Attributes;
-using Tools.SmartComponent;
+using Backend.Systems.Component;
 using UnityEngine;
 
 namespace Game.Example

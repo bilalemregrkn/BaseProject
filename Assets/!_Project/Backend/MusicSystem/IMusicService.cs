@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Plugins.MusicService
+namespace Backend.Systems.Music
 {
     public interface IMusicService
     {

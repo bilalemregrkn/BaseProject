@@ -1,4 +1,4 @@
-namespace Plugins.EventBus
+namespace Backend.Systems.EventBus
 {
     public interface IEvent { }
 }

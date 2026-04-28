@@ -1,4 +1,4 @@
-namespace Tools.SmartComponent
+namespace Backend.Systems.Component
 {
     public class BaseText : SmartComponent
     {

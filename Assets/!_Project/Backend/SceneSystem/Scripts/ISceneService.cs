@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace Plugins.SceneService
+namespace Backend.Systems.Scene
 {
     public interface ISceneService
     {

@@ -1,6 +1,6 @@
 {
     "name": "Backend.Systems.Save",
-    "rootNamespace": "Plugins.SaveService",
+    "rootNamespace": "Backend.Systems.Save",
     "references": [
         "GUID:ad257b701659a484bac097439b941a7a",
         "GUID:1530a967b84cfb44dbdd5e8a1989764f"

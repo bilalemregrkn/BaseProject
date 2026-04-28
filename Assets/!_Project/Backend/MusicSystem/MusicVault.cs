@@ -1,6 +1,6 @@
-using Plugins.SaveService;
+using Backend.Systems.Save;
 
-namespace Plugins.MusicService
+namespace Backend.Systems.Music
 {
     public sealed class MusicVault
     {

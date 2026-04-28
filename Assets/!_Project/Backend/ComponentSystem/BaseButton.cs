@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tools.SmartComponent
+namespace Backend.Systems.Component
 {
     public class BaseButton : SmartComponent
     {

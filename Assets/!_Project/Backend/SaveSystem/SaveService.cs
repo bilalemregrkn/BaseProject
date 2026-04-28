@@ -1,7 +1,7 @@
-using Plugins.EventBus;
+using Backend.Systems.EventBus;
 using UnityEngine;
 
-namespace Plugins.SaveService
+namespace Backend.Systems.Save
 {
     public sealed class SaveService : ISaveService
     {

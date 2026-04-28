@@ -1,4 +1,4 @@
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     public class PanelGameSetting : PanelBase
     {

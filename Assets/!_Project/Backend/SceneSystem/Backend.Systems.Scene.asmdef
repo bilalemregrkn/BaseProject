@@ -1,6 +1,6 @@
 {
     "name": "Backend.Systems.Scene",
-    "rootNamespace": "Plugins.SceneService",
+    "rootNamespace": "Backend.Systems.Scene",
     "references": [
         "GUID:ad257b701659a484bac097439b941a7a",
         "GUID:f51ebe6a0ceec4240a699833d6309b23",

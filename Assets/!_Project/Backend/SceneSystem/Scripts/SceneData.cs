@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.SceneService
+namespace Backend.Systems.Scene
 {
     public abstract class SceneData : ScriptableObject
     {

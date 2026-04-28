@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.CurrencyService
+namespace Backend.Systems.Currency
 {
     
     [CreateAssetMenu(menuName = "Create CurrencyDefault", fileName = "CurrencyDefault", order = 0)]

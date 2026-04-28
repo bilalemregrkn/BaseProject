@@ -3,7 +3,7 @@ using Reflex.Enums;
 using UnityEngine;
 using Resolution = Reflex.Enums.Resolution;
 
-namespace Plugins.SceneService
+namespace Backend.Systems.Scene
 {
     public class SceneServiceInstaller : MonoBehaviour, IInstaller
     {

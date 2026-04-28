@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Plugins.SaveService;
+using Backend.Systems.Save;
 
-namespace Plugins.CurrencyService
+namespace Backend.Systems.Currency
 {
     public sealed class CurrencyVault
     {

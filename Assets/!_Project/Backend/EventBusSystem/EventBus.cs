@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Plugins.EventBus
+namespace Backend.Systems.EventBus
 {
     public sealed class EventBus : IEventBus
     {

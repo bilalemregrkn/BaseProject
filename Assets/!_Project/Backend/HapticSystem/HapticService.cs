@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.HapticService
+namespace Backend.Systems.Haptic
 {
     public sealed class HapticService : IHapticService
     {

@@ -1,7 +1,7 @@
-using Plugins.EventBus;
+using Backend.Systems.EventBus;
 using UnityEngine;
 
-namespace Plugins.AudioService
+namespace Backend.Systems.Audio
 {
     public sealed class AudioService : IAudioService
     {

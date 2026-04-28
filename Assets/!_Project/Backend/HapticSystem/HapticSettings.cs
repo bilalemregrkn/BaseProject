@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.HapticService
+namespace Backend.Systems.Haptic
 {
     [CreateAssetMenu(menuName = "Game/Haptic Settings", fileName = "HapticSettings")]
     public class HapticSettings : ScriptableObject

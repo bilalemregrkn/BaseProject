@@ -1,11 +1,11 @@
-using Plugins.AudioService;
-using Plugins.CurrencyService;
-using Plugins.EventBus;
-using Plugins.UpdateService;
+using Backend.Systems.Audio;
+using Backend.Systems.Currency;
+using Backend.Systems.EventBus;
+using Backend.Systems.Update;
 using PrimeTween;
 using Reflex.Attributes;
 using UnityEngine;
-using AudioType = Plugins.AudioService.AudioType;
+using AudioType = Backend.Systems.Audio.AudioType;
 
 
 namespace Game.Example

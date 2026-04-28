@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Plugins.EventBus;
+using Backend.Systems.EventBus;
 using UnityEngine;
 
-namespace Plugins.SceneService
+namespace Backend.Systems.Scene
 {
     public sealed class SceneService : ISceneService
     {

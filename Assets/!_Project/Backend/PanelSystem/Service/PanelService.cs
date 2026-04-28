@@ -4,7 +4,7 @@ using Reflex.Core;
 using Reflex.Injectors;
 using UnityEngine;
 
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     public sealed class PanelService : IPanelService
     {

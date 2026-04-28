@@ -3,7 +3,7 @@ using Reflex.Enums;
 using UnityEngine;
 using Resolution = Reflex.Enums.Resolution;
 
-namespace Plugins.AudioService
+namespace Backend.Systems.Audio
 {
     public class AudioServiceInstaller : MonoBehaviour, IInstaller
     {

@@ -2,7 +2,7 @@ using Reflex.Core;
 using Reflex.Enums;
 using UnityEngine;
 
-namespace Plugins.CurrencyService
+namespace Backend.Systems.Currency
 {
     public class CurrencyServiceInstaller : MonoBehaviour, IInstaller
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Plugins.AudioService
+namespace Backend.Systems.Audio
 {
     public sealed class AudioPlayer : MonoBehaviour
     {

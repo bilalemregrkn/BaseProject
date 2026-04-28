@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using PrimeTween;
 using UnityEngine;
 
-namespace Plugins.MusicService
+namespace Backend.Systems.Music
 {
     public sealed class MusicService : MonoBehaviour, IMusicService
     {

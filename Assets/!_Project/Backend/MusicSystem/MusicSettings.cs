@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Plugins.MusicService
+namespace Backend.Systems.Music
 {
     [CreateAssetMenu(menuName = "Game/Music Settings", fileName = "MusicSettings")]
     public class MusicSettings : ScriptableObject

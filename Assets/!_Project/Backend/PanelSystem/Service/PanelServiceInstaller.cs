@@ -3,7 +3,7 @@ using Reflex.Enums;
 using UnityEngine;
 using Resolution = Reflex.Enums.Resolution;
 
-namespace Plugins.PanelService
+namespace Backend.Systems.Panel
 {
     public class PanelServiceInstaller : MonoBehaviour, IInstaller
     {

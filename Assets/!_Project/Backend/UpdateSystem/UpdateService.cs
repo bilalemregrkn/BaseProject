@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Plugins.UpdateService
+namespace Backend.Systems.Update
 {
     public sealed class UpdateService : MonoBehaviour, IUpdateService
     {

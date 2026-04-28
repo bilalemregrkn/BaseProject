@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Plugins.AudioService
+namespace Backend.Systems.Audio
 {
     [CreateAssetMenu(menuName = "Game/Audio Settings", fileName = "AudioSettings")]
     public class AudioSettings : ScriptableObject
