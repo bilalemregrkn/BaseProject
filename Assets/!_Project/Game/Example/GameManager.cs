@@ -11,7 +11,7 @@ namespace Game.Example
         
         private void Start()
         {
-            _panelService.ShowAsync(PanelType.Panel_GamePlay);
+            _panelService.ShowAsync(PanelType.GamePlay);
         }
     }
 }

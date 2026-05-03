@@ -11,6 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d61b677c87b467fb31995106005a5ab, type: 3}
   m_Name: Panel-Setting
-  m_EditorClassIdentifier:
-  _id: Panel-Setting
+  m_EditorClassIdentifier: 
+  _id: Setting
   _prefab: {fileID: 7870804881452058723, guid: 802d118d3be394a8f911af77c2a98939, type: 3}

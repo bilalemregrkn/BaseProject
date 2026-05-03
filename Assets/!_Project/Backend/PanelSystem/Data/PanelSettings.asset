@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: PanelSettings
   m_EditorClassIdentifier: Game.Plugins.PanelService::Plugins.PanelService.PanelSettings
   _panels:
-  - {fileID: 11400000, guid: 744457c65170402aa3269146c3ea3bae, type: 2}
   - {fileID: 11400000, guid: cf75032c60e94127b71cfa2becdb3de2, type: 2}
-  - {fileID: 11400000, guid: d9f5479754ec4fda90787a2b48bae0dc, type: 2}
   - {fileID: 11400000, guid: 03112aef8dee43b6bfbcddb646fd9f39, type: 2}

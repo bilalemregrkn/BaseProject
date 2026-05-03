@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8257167895919248189}
   - component: {fileID: -6652672830517770013}
   - component: {fileID: -214997198555422956}
+  - component: {fileID: 2863191244812128366}
   m_Layer: 0
   m_Name: RootScope
   m_TagString: Untagged
@@ -166,3 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bfd110eb879434f946fc4a2a4cf80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Plugins.EventBus::Plugins.EventBus.EventBusInstaller
+--- !u!114 &2863191244812128366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206273090256892044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b51ce24e9ec24d5684d26b1e727123e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Backend.Systems.Timer::Backend.Systems.Timer.TimerServiceInstaller

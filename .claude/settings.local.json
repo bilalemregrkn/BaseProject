@@ -39,7 +39,9 @@
       "Bash(sed -i '' 's|menuName = \"Game/Haptic Settings\"|menuName = \"Systems/Haptic/Settings\"|' /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/HapticSystem/HapticSettings.cs)",
       "Bash(sed -i '' 's|menuName = \"Game/Currency Settings\"|menuName = \"Systems/Currency/Settings\"|' /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/CurrencySystem/Service/CurrencySettings.cs)",
       "Bash(sed -i '' 's|menuName = \"Create CurrencyDefault\"|menuName = \"Systems/Currency/Default\"|' /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Backend/CurrencySystem/Base/CurrencyDefault.cs)",
-      "Bash(grep -A30 \"fileID: 354894401$\" /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Game/GameScene.unity)"
+      "Bash(grep -A30 \"fileID: 354894401$\" /Users/bilalemregurkan/reposMy/BaseProject/Assets/!_Project/Game/GameScene.unity)",
+      "Bash(grep -E \"\\\\.\\(cs|prefab\\)$\")",
+      "Bash(grep \"\\\\.cs$\")"
     ]
   }
 }
