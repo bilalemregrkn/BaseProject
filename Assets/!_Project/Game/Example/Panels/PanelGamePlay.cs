@@ -45,8 +45,8 @@ namespace Game.Example
             buttonOpenSetting.MyButton.onClick.AddListener(OnClickOpenSetting);
             buttonGiveScore.MyButton.onClick.AddListener(OnClickGiveScore);
             buttonGiveGold.MyButton.onClick.AddListener(OnClickGiveGold);
-            buttonGiveGold.MyButton.onClick.AddListener(OnClickReset);
-            buttonGiveGold.MyButton.onClick.AddListener(OnClickTimer);
+            buttonReset.MyButton.onClick.AddListener(OnClickReset);
+            buttonTimer.MyButton.onClick.AddListener(OnClickTimer);
 
             RefreshScoreText();
         }
@@ -60,13 +60,17 @@ namespace Game.Example
 
         private void OnTimerExpired(TimerExpired obj)
         {
-            _timerService.GetRemaining("ExampleTimer").ToString();
+            if (obj.Id != "ExampleTimer")
+                return;
+            _eventBus.Unsubscribe<TimerExpired>(OnTimerExpired);
+            textTimer.text = "Timer: 0.0s";
         }
 
         private void OnClickReset()
         {
             _audioService.Play(AudioType.Button_press);
             _saveService.Save(BestScoreKey, 0);
+            _score = 0;
             _currencyService.Set(CurrencyType.Gold, 0);
             RefreshScoreText();
         }
@@ -93,7 +97,10 @@ namespace Game.Example
 
         private void CheckBestScore()
         {
-            //TODO:
+            var best = _saveService.Load(BestScoreKey, 0);
+            if (_score <= best) return;
+            _saveService.Save(BestScoreKey, _score);
+            textBestScore.text = $"Best: {_score}";
         }
 
         private void OnClickGiveGold()
@@ -105,6 +112,7 @@ namespace Game.Example
         private void RefreshScoreText()
         {
             textScore.text = $"Score: {_score}";
+            textBestScore.text = $"Best: {_saveService.Load(BestScoreKey, 0)}";
         }
 
         public void Tick(float dt)
