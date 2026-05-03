@@ -1,4 +1,3 @@
-using Backend.Systems.Currency;
 using Backend.Systems.EventBus;
 using Backend.Systems.Panel;
 using Backend.Systems.Save;
@@ -14,38 +13,24 @@ namespace Game.Example
         [SerializeField] private TextMeshProUGUI _highScoreText;
 
         [Inject] private IEventBus _eventBus;
-        [Inject] private ICurrencyService _currencyService;
         [Inject] private IPanelService _panelService;
         [Inject] private ISaveService _saveService;
 
         private const string HighScoreKey = "ClickGame_HighScore";
         private int _highScore;
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
         private void Start()
         {
             _highScore = _saveService.Load(HighScoreKey, 0);
             _panelService.Register(PanelType.Panel_GamePlay, this);
+            _eventBus.Subscribe<CircleClickedEvent>(OnCircleClicked);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
             _panelService?.Unregister(PanelType.Panel_GamePlay);
-        }
-
-        private void OnEnable()
-        {
-            _eventBus?.Subscribe<CurrencyChanged>(OnCurrencyChanged);
-        }
-
-        private void OnDisable()
-        {
-            _eventBus?.Unsubscribe<CurrencyChanged>(OnCurrencyChanged);
+            _eventBus?.Unsubscribe<CircleClickedEvent>(OnCircleClicked);
         }
 
         protected override void OnShown()
@@ -53,10 +38,9 @@ namespace Game.Example
             RefreshScore(0);
         }
 
-        private void OnCurrencyChanged(CurrencyChanged e)
+        private void OnCircleClicked(CircleClickedEvent e)
         {
-            if (e.Type != CurrencyType.Gold) return;
-            RefreshScore(e.NewAmount);
+            RefreshScore(e.Score);
         }
 
         private void RefreshScore(int score)

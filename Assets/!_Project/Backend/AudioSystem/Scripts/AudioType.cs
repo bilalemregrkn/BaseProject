@@ -5,6 +5,5 @@ namespace Backend.Systems.Audio
     {
         public const string Beep = "beep";
         public const string Button_press = "button_press";
-        public const string Warning = "warning";
     }
 }

@@ -21,8 +21,11 @@ namespace Game.Example
         [Inject] private IAudioService _audioService;
         [Inject] private IEventBus _eventBus;
 
+        private const int GoldPerScore = 5;
+
         private float _timer;
         private bool _active;
+        private int _score;
 
         private void OnDestroy()
         {
@@ -57,16 +60,18 @@ namespace Game.Example
 
         private void OnCircleClicked()
         {
-            //Action
             _audioService.Play(AudioType.Beep);
-            _currencyService.Add(CurrencyType.Gold, 1);
-            _eventBus.Publish(new CircleClickedEvent());
+            _score++;
+            if (_score % GoldPerScore == 0)
+                _currencyService.Add(CurrencyType.Gold, 1);
+            _eventBus.Publish(new CircleClickedEvent { Score = _score });
             _timer = _spawnInterval;
         }
 
         public void Play()
         {
             _timer = 0f;
+            _score = 0;
             _active = true;
             _updateService.Add(this);
         }
