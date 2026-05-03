@@ -1,0 +1,19 @@
+{
+    "name": "Backend.Systems.Timer",
+    "rootNamespace": "Backend.Systems.Timer",
+    "references": [
+        "GUID:ad257b701659a484bac097439b941a7a",
+        "GUID:5d728edac334745ec908e43f88fc8077",
+        "GUID:6370285ba26bd4992afd7b36d3acd7e1",
+        "GUID:1530a967b84cfb44dbdd5e8a1989764f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
