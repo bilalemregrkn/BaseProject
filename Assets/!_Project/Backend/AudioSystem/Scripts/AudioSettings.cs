@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Backend.Systems.Component;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -6,7 +7,7 @@ using UnityEngine.Audio;
 namespace Backend.Systems.Audio
 {
     [CreateAssetMenu(menuName = "Systems/Audio/Settings", fileName = "AudioSettings")]
-    public class AudioSettings : ScriptableObject
+    public class AudioSettings : BaseServiceSetting
     {
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] [Range(0f, 1f)] private float _defaultVolume = 1f;

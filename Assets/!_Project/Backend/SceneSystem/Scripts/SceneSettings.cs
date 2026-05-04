@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Backend.Systems.Component;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Backend.Systems.Scene
 {
     [CreateAssetMenu(menuName = "Systems/Scene/Settings", fileName = "SceneSettings")]
-    public class SceneSettings : ScriptableObject
+    public class SceneSettings : BaseServiceSetting
     {
         [SerializeField] [InlineEditor] private List<SceneData> _scenes = new();
 

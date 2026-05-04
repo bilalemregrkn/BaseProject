@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Backend.Systems.Component;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Backend.Systems.Reward
 {
     [CreateAssetMenu(menuName = "Systems/Reward/Settings", fileName = "RewardSettings")]
-    public class RewardSettings : ScriptableObject
+    public class RewardSettings : BaseServiceSetting
     {
         [SerializeField] [InlineEditor] private List<RewardData> _rewards = new();
 

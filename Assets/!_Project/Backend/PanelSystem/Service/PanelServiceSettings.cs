@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Backend.Systems.Component;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Backend.Systems.Panel
 {
     [CreateAssetMenu(menuName = "Systems/Panel/Settings", fileName = "PanelSettings")]
-    public class PanelServiceSettings : ScriptableObject
+    public class PanelServiceSettings : BaseServiceSetting
     {
         [SerializeField] [InlineEditor] private List<PanelData> _panels = new();
 

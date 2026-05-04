@@ -1,12 +1,12 @@
 using System.Collections.Generic;
+using Backend.Systems.Component;
 using Sirenix.OdinInspector;
 using UnityEngine;
-
 
 namespace Backend.Systems.Currency
 {
     [CreateAssetMenu(menuName = "Systems/Currency/Settings", fileName = "CurrencySettings")]
-    public class CurrencySettings : ScriptableObject
+    public class CurrencySettings : BaseServiceSetting
     {
         [SerializeField] [InlineEditor] private List<CurrencyData> _currencies = new();
 

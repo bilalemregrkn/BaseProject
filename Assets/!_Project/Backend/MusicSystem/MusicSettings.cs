@@ -1,10 +1,11 @@
+using Backend.Systems.Component;
 using UnityEngine;
 using UnityEngine.Audio;
 
 namespace Backend.Systems.Music
 {
     [CreateAssetMenu(menuName = "Systems/Music/Settings", fileName = "MusicSettings")]
-    public class MusicSettings : ScriptableObject
+    public class MusicSettings : BaseServiceSetting
     {
         [SerializeField] private AudioMixerGroup _mixerGroup;
         [SerializeField] [Range(0f, 1f)] private float _defaultVolume = 1f;

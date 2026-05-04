@@ -3,7 +3,8 @@
     "rootNamespace": "Backend.Systems.Haptic",
     "references": [
         "GUID:5d728edac334745ec908e43f88fc8077",
-        "GUID:1530a967b84cfb44dbdd5e8a1989764f"
+        "GUID:1530a967b84cfb44dbdd5e8a1989764f",
+        "GUID:42917d78e89b64da4be73eca88a8060e"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
