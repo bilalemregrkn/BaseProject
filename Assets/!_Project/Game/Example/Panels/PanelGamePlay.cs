@@ -6,7 +6,6 @@ using Backend.Systems.EventBus;
 using Backend.Systems.Panel;
 using Backend.Systems.Save;
 using Backend.Systems.Timer;
-using Backend.Systems.Update;
 using Cysharp.Threading.Tasks;
 using Reflex.Attributes;
 using TMPro;
@@ -16,7 +15,7 @@ using AudioType = Backend.Systems.Audio.AudioType;
 
 namespace Game.Example
 {
-    public class PanelGamePlay : PanelBase, IUpdatable
+    public class PanelGamePlay : PanelBase
     {
         private const string BestScoreKey = "best_score";
         private const int ScoreIncrement = 10;
@@ -31,14 +30,14 @@ namespace Game.Example
         [SerializeField] private BaseButton buttonTimer;
         [SerializeField] private TextMeshProUGUI textScore;
         [SerializeField] private TextMeshProUGUI textBestScore;
-        [SerializeField] private TextMeshProUGUI textTimer;
+        [SerializeField] private TextCountDown textCountDown;
 
         [Inject] private IPanelService _panelService;
         [Inject] private IEventBus _eventBus;
         [Inject] private ISaveService _saveService;
         [Inject] private ICurrencyService _currencyService;
         [Inject] private IAudioService _audioService;
-        [Inject] private ITimerService _timerService;
+        [Inject] private Deadline _deadline;
 
         private void Start()
         {
@@ -54,16 +53,8 @@ namespace Game.Example
         private void OnClickTimer()
         {
             _audioService.Play(AudioType.Button_press);
-            _timerService.Start("ExampleTimer", TimeSpan.FromSeconds(5));
-            _eventBus.Subscribe<TimerExpired>(OnTimerExpired);
-        }
-
-        private void OnTimerExpired(TimerExpired obj)
-        {
-            if (obj.Id != "ExampleTimer")
-                return;
-            _eventBus.Unsubscribe<TimerExpired>(OnTimerExpired);
-            textTimer.text = "Timer: 0.0s";
+            _deadline.Init(new TimeSpan(0, 1, 0));
+            textCountDown.Init(_deadline);
         }
 
         private void OnClickReset()
@@ -113,12 +104,6 @@ namespace Game.Example
         {
             textScore.text = $"Score: {_score}";
             textBestScore.text = $"Best: {_saveService.Load(BestScoreKey, 0)}";
-        }
-
-        public void Tick(float dt)
-        {
-            if (_timerService.IsRunning("ExampleTimer"))
-                textTimer.text = $"Timer: {_timerService.GetRemaining("ExampleTimer").TotalSeconds:F1}s";
         }
     }
 }

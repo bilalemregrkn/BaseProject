@@ -8,8 +8,7 @@ namespace Backend.Systems.Timer
     {
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.RegisterType(typeof(TimerVault),   new[] { typeof(TimerVault) },   Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
-            builder.RegisterType(typeof(TimerService), new[] { typeof(ITimerService) }, Lifetime.Singleton, Reflex.Enums.Resolution.Lazy);
+            builder.RegisterType(typeof(Deadline), Reflex.Enums.Lifetime.Transient, Reflex.Enums.Resolution.Lazy);
         }
     }
 }
